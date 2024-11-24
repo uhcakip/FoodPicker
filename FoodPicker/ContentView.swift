@@ -68,40 +68,35 @@ struct ContentView: View {
                         .font(.title2)
                     
                     // MARK: - Selected food info
-                    if showFoodInfo {
-                        HStack {
-                            VStack(spacing: 12) {
-                                Text("蛋白質")
-                                Text("\(selectedFood.protein.formatted()) g")
+                    VStack {
+                        if showFoodInfo {
+                            Grid(horizontalSpacing: 12, verticalSpacing: 12) {
+                                GridRow {
+                                    Text("蛋白質")
+                                    Text("脂肪")
+                                    Text("碳水")
+                                }
+                                .frame(minWidth: 60)
+                                
+                                Divider()
+                                    .gridCellUnsizedAxes(.horizontal)
+                                    .padding(.horizontal, -10)
+                                
+                                GridRow {
+                                    Text("\(selectedFood.protein.formatted()) g")
+                                    Text("\(selectedFood.fat.formatted()) g")
+                                    Text("\(selectedFood.carb.formatted()) g")
+                                }
                             }
-                            
-                            Divider().frame(width: 1).padding(.horizontal)
-                            
-                            VStack(spacing: 12) {
-                                Text("脂肪")
-                                Text("\(selectedFood.fat.formatted()) g")
-                            }
-                            
-                            Divider().frame(width: 1).padding(.horizontal)
-                            
-                            VStack(spacing: 12) {
-                                Text("碳水")
-                                Text("\(selectedFood.carb.formatted()) g")
-                            }
+                            .font(.title3)
+                            .padding()
+                            .padding(.horizontal)
+                            .background(RoundedRectangle(cornerRadius: 8).foregroundStyle(Color(.systemBackground)))
+                            .transition(.move(edge: .top).combined(with: .opacity))
                         }
-                        .font(.title3)
-                        .padding()
-                        .padding(.horizontal)
-                        .background(RoundedRectangle(cornerRadius: 8).foregroundStyle(Color(.systemBackground)))
-                        .transition(
-                            .asymmetric(
-                                insertion: .move(edge: .top).combined(
-                                    with: .opacity),
-                                removal: .move(edge: .top).combined(
-                                    with: .opacity)
-                            )
-                        )
                     }
+                    .frame(maxWidth: .infinity)
+                    .clipped()
                 }
                 
                 Spacer().layoutPriority(1)
@@ -133,6 +128,7 @@ struct ContentView: View {
             .buttonBorderShape(.capsule)
             .controlSize(.large)
             .animation(.easeInOut(duration: 0.4), value: selectedFood)
+            .animation(.spring(dampingFraction: 0.55), value: showFoodInfo)
         }
         .background(Color(.secondarySystemBackground))
     }
