@@ -37,7 +37,7 @@ struct ContentView: View {
             .animation(.fpEase, value: selectedFood)
             .animation(.fpSpring, value: shouldShowFoodInfo)
         }
-        .background(Color.secondBg)
+        .background(.secondBg)
     }
 }
 

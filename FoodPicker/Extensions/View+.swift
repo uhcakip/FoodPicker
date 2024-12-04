@@ -16,8 +16,8 @@ extension View {
 
     func roundedRectBackground(
         radius: CGFloat = 8,
-        fill: some ShapeStyle = Color.mainBg
+        fill: some ShapeStyle = .mainBg
     ) -> some View {
-        background(RoundedRectangle(cornerRadius: radius).foregroundStyle(fill))
+        background(RoundedRectangle(cornerRadius: radius).fill(fill))
     }
 }
