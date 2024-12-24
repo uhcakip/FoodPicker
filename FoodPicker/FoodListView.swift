@@ -106,8 +106,7 @@ private extension FoodListView {
             
             removeSelectionsButton
                 .opacity(isEditing ? 1 : 0)
-                .transition(.move(edge: .leading).combined(with: .opacity))
-                .id(isEditing)
+                .offset(x: isEditing ? 0 : -60)
         }
         .animation(.easeInOut, value: isEditing)
     }
