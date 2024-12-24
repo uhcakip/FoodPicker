@@ -13,6 +13,8 @@ struct FoodListView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
     @State private var foods = Food.examples
     @State private var selectedFoodIDs = Set<Food.ID>()
+    @State private var foodInfoHeight = PreferredFoodInfoSheetHeight.defaultValue
+    @State private var shouldShowFoodInfo = false
     
     var isEditing: Bool {
         editMode?.wrappedValue.isEditing == true
@@ -25,6 +27,11 @@ struct FoodListView: View {
             List($foods, editActions: .all, selection: $selectedFoodIDs) { $food in
                 Text(food.name)
                     .padding(.vertical, 5)
+                    .onTapGesture {
+                        if !isEditing {
+                            shouldShowFoodInfo = true
+                        }
+                    }
             }
             .listStyle(.plain)
             .padding(.horizontal)
@@ -33,7 +40,7 @@ struct FoodListView: View {
         .scrollIndicators(.hidden)
         .background(Color(.groupBg))
         .safeAreaInset(edge: .bottom, content: buildFloatingButton)
-        .sheet(isPresented: .constant(false)) {
+        .sheet(isPresented: $shouldShowFoodInfo) {
             let food = foods[0]
             
             AnyLayout.vhStack(
@@ -51,9 +58,18 @@ struct FoodListView: View {
                     buildNutritionGridRowView(title: "脂肪", value: food.$fat)
                     buildNutritionGridRowView(title: "碳水", value: food.$carb)
                 }
-                .presentationDetents([.medium])
             }
             .padding()
+            .overlay {
+                GeometryReader {
+                    Color.clear
+                        .preference(key: PreferredFoodInfoSheetHeight.self, value: $0.size.height)
+                }
+            }
+            .onPreferenceChange(PreferredFoodInfoSheetHeight.self) {
+                foodInfoHeight = $0
+            }
+            .presentationDetents([.height(foodInfoHeight)])
         }
         .enableInjection()
     }
@@ -115,6 +131,14 @@ private extension FoodListView {
         GridRow {
             Text(title).gridCellAnchor(.leading)
             Text(value).gridCellAnchor(.trailing)
+        }
+    }
+    
+    // MARK: - Preferences
+    struct PreferredFoodInfoSheetHeight: PreferenceKey {
+        static var defaultValue: CGFloat = 300
+        static func reduce(value: inout Value, nextValue: () -> Value) {
+            value = nextValue()
         }
     }
 }
