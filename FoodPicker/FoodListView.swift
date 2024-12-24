@@ -27,6 +27,12 @@ struct FoodListView: View {
             List($foods, editActions: .all, selection: $selectedFoodIDs) { $food in
                 Text(food.name)
                     .padding(.vertical, 5)
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: .infinity,
+                        alignment: .leading
+                    )
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         if !isEditing {
                             tappedFood = food
