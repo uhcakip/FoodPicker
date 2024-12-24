@@ -47,14 +47,13 @@ struct FoodListView: View {
         .background(Color(.groupBg))
         .safeAreaInset(edge: .bottom, content: buildFloatingButton)
         .sheet(item: $tappedFood) { food in
-            AnyLayout.vhStack(
-                isVertical: dynamicTypeSize.isAccessibilitySize || food.image.count > 1,
-                spacing: 30
-            ) {
+            let shouldUseVStack = dynamicTypeSize.isAccessibilitySize || food.image.count > 1
+            
+            AnyLayout.vhStack(isVertical: shouldUseVStack, spacing: 30) {
                 Text(food.image)
                     .font(.system(size: 100))
                     .lineLimit(1)
-                    .minimumScaleFactor(0.5)
+                    .minimumScaleFactor(shouldUseVStack ? 1 : 0.5)
                 
                 Grid(horizontalSpacing: 12, verticalSpacing: 12) {
                     buildNutritionGridRowView(title: "熱量", value: food.$calorie)
