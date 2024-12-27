@@ -43,7 +43,8 @@ struct FoodListView: View {
                     Image(systemName: "pencil")
                         .font(.title3.bold())
                         .foregroundStyle(.accent)
-                        .opacity(isEditing ? 1 : 0)
+                        .offset(x: isEditing ? 0 : 60)
+                        .animation(.easeInOut(duration: 0.3), value: isEditing)
                 }
             }
             .listStyle(.plain)
