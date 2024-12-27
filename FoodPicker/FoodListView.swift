@@ -25,23 +25,29 @@ struct FoodListView: View {
             titleBar
             
             List($foods, editActions: .all, selection: $selectedFoodIDs) { $food in
-                Text(food.name)
-                    .padding(.vertical, 5)
-                    .frame(
-                        maxWidth: .infinity,
-                        maxHeight: .infinity,
-                        alignment: .leading
-                    )
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        if !isEditing {
-                            tappedFood = food
+                HStack {
+                    Text(food.name)
+                        .padding(.vertical, 5)
+                        .frame(
+                            maxWidth: .infinity,
+                            maxHeight: .infinity,
+                            alignment: .leading
+                        )
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            if !isEditing {
+                                tappedFood = food
+                            }
                         }
-                    }
+                    
+                    Image(systemName: "pencil")
+                        .font(.title3.bold())
+                        .foregroundStyle(.accent)
+                        .opacity(isEditing ? 1 : 0)
+                }
             }
             .listStyle(.plain)
             .padding(.horizontal)
-            
         }
         .scrollIndicators(.hidden)
         .background(Color(.groupBg))
