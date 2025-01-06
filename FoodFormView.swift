@@ -23,56 +23,72 @@ extension FoodListView {
         }
         
         var body: some View {
-            VStack {
-                HStack {
-                    Label(action.text, systemImage: action.image)
-                        .font(.title.bold())
-                        .foregroundStyle(.accent)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+            NavigationStack {
+                VStack {
+                    HStack {
+                        Label(action.text, systemImage: action.image)
+                            .font(.title.bold())
+                            .foregroundStyle(.accent)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Button {
+                            dismiss()
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.system(size: 30))
+                                .foregroundStyle(Color.secondary)
+                        }
+                    }
+                    .padding([.horizontal, .top])
+                    
+                    Form {
+                        Field.name.buildString(value: $food.name, focusedField: $field)
+                        Field.emoji.buildString(value: $food.image, focusedField: $field)
+                        Field.calories.buildNumber(value: $food.calorie, focusedField: $field)
+                        Field.carb.buildNumber(value: $food.carb, focusedField: $field)
+                        Field.fat.buildNumber(value: $food.fat, focusedField: $field)
+                        Field.protein.buildNumber(value: $food.protein, focusedField: $field)
+                    }
+                    .padding(.top, -16)
                     
                     Button {
-                        dismiss()
+                        
                     } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 30))
-                            .foregroundStyle(Color.secondary)
+                        Text(inValidMessage ?? "Save")
+                            .frame(maxWidth: .infinity)
+                            .foregroundStyle(isInputInvalid ? .secondary : Color.Catppuccin.buttonText)
+                    }
+                    .mainButtonStyle()
+                    .padding()
+                    .disabled(isInputInvalid)
+                }
+                .background(.groupBg)
+                .multilineTextAlignment(.trailing)
+                .font(.title3)
+                .scrollDismissesKeyboard(.interactively)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button(action: goPrevField) {
+                            Image(systemName: "chevron.up")
+                        }
+                        Button(action: goNextField) {
+                            Image(systemName: "chevron.down")
+                        }
                     }
                 }
-                .padding([.horizontal, .top])
-                
-                Form {
-                    Field.name.buildString(value: $food.name, focusedField: $field)
-                    Field.emoji.buildString(value: $food.image, focusedField: $field)
-                    Field.calories.buildNumber(value: $food.calorie, focusedField: $field)
-                    Field.carb.buildNumber(value: $food.carb, focusedField: $field)
-                    Field.fat.buildNumber(value: $food.fat, focusedField: $field)
-                    Field.protein.buildNumber(value: $food.protein, focusedField: $field)
-                }
-                .padding(.top, -16)
-                
-                Button {
-                    
-                } label: {
-                    Text(inValidMessage ?? "Save")
-                        .frame(maxWidth: .infinity)
-                        .foregroundStyle(isInputInvalid ? .secondary : Color.Catppuccin.buttonText)
-                }
-                .mainButtonStyle()
-                .padding()
-                .disabled(isInputInvalid)
             }
-            .background(.groupBg)
-            .multilineTextAlignment(.trailing)
-            .font(.title3)
-            .scrollDismissesKeyboard(.interactively)
             .enableInjection()
         }
     }
 }
 
 private extension FoodListView.FoodFormView {
-    enum Field {
+    enum Field: Int {
         case name, emoji, calories, carb, fat, protein
+        
+        static let first: Self = .name
+        static let last: Self = .protein
         
         var title: String {
             switch self {
@@ -100,30 +116,15 @@ private extension FoodListView.FoodFormView {
             }
         }
         
-        var nextField: Field? {
-            switch self {
-            case .name: .emoji
-            case .emoji: .calories
-            case .calories: .carb
-            case .carb: .fat
-            case .fat: .protein
-            case .protein: nil
-            }
-        }
-        
         func buildString(
             value: Binding<String>,
             focusedField: FocusState<Field?>.Binding
         ) -> some View {
             LabeledContent(title) {
                 TextField(placeholder, text: value)
-                    .submitLabel(.next)
                     .focused(focusedField, equals: self)
                     .onSubmit {
                         value.wrappedValue = value.wrappedValue.trimmingCharacters(in: .whitespacesAndNewlines)
-                        if let nextField = nextField {
-                            focusedField.wrappedValue = nextField
-                        }
                     }
             }
         }
@@ -135,13 +136,8 @@ private extension FoodListView.FoodFormView {
             LabeledContent(title) {
                 HStack {
                     TextField("", value: value, format: .number.precision(.fractionLength(1)))
-                        .keyboardType(.numbersAndPunctuation)
+                        .keyboardType(.decimalPad)
                         .focused(focusedField, equals: self)
-                        .onSubmit {
-                            if let nextField = nextField {
-                                focusedField.wrappedValue = nextField
-                            }
-                        }
                     Text(suffix)
                 }
             }
@@ -156,6 +152,22 @@ private extension FoodListView.FoodFormView {
         if food.name.isEmpty { return "Name is required" }
         if food.image.count > 2 { return "Emoji is too long" }
         return nil
+    }
+    
+    private func goPrevField() {
+        if let currentField = field {
+            field = .init(
+                rawValue: currentField == .first ? Field.last.rawValue : currentField.rawValue - 1
+            )
+        }
+    }
+    
+    private func goNextField() {
+        if let currentField = field {
+            field = .init(
+                rawValue: currentField == .last ? Field.first.rawValue : currentField.rawValue + 1
+            )
+        }
     }
 }
 
