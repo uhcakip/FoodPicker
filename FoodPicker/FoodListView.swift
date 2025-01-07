@@ -12,7 +12,7 @@ struct FoodListView: View {
     @Environment(\.editMode) var editMode
     @State private var foods = Food.examples
     @State private var selectedFoodIDs = Set<Food.ID>()
-    @State private var tappedFood: Food?
+    @State private var sheet: Sheet?
     
     var isEditing: Bool {
         editMode?.wrappedValue.isEditing == true
@@ -34,7 +34,7 @@ struct FoodListView: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                             if !isEditing {
-                                tappedFood = food
+                                sheet = .foodDetail(food: food)
                             }
                         }
                     
@@ -43,6 +43,9 @@ struct FoodListView: View {
                         .foregroundStyle(.accent)
                         .offset(x: isEditing ? 0 : 60)
                         .animation(.easeInOut(duration: 0.3), value: isEditing)
+                        .onTapGesture {
+                            sheet = .editFood(food: $food)
+                        }
                 }
             }
             .listStyle(.plain)
@@ -51,12 +54,40 @@ struct FoodListView: View {
         .scrollIndicators(.hidden)
         .background(Color(.groupBg))
         .safeAreaInset(edge: .bottom, content: buildFloatingButton)
-        .sheet(item: $tappedFood) { FoodDetailView(food: $0) }
+        .sheet(item: $sheet) { $0 }
         .enableInjection()
     }
 }
 
 private extension FoodListView {
+    enum Sheet: View, Identifiable {
+        case addFood(save: (Food) -> Void)
+        case editFood(food: Binding<Food>)
+        case foodDetail(food: Food)
+        
+        var id: UUID {
+            switch self {
+            case .addFood:
+                UUID()
+            case .editFood(let food):
+                food.id
+            case .foodDetail(let food):
+                food.id
+            }
+        }
+        
+        var body: some View {
+            switch self {
+            case .addFood(let save):
+                FoodListView.FoodFormView(food: Food.new, save: save)
+            case .editFood(let food):
+                FoodListView.FoodFormView(food: food.wrappedValue) { food.wrappedValue = $0 }
+            case .foodDetail(let food):
+                FoodListView.FoodDetailView(food: food)
+            }
+        }
+    }
+    
     struct FoodDetailView: View {
         @Environment(\.dynamicTypeSize) private var dynamicTypeSize
         @State private var foodInfoHeight = 0.0
@@ -112,7 +143,7 @@ private extension FoodListView {
     
     var addButton: some View {
         Button {
-            
+            sheet = .addFood { foods.append($0) }
         } label: {
             Image(systemName: "plus.circle.fill")
                 .font(.system(size: 50))
@@ -139,7 +170,7 @@ private extension FoodListView {
                 .opacity(isEditing ? 0 : 1)
                 .scaleEffect(isEditing ? 0 : 1)
                 .frame(maxWidth: .infinity, alignment: .trailing)
-            
+
             removeSelectionsButton
                 .opacity(isEditing ? 1 : 0)
                 .offset(x: isEditing ? 0 : -60)
