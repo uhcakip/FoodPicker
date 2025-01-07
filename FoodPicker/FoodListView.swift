@@ -22,32 +22,12 @@ struct FoodListView: View {
         VStack(alignment: .leading) {
             titleBar
             
-            List($foods, editActions: .all, selection: $selectedFoodIDs) { $food in
-                HStack {
-                    Text(food.name)
-                        .padding(.vertical, 5)
-                        .frame(
-                            maxWidth: .infinity,
-                            maxHeight: .infinity,
-                            alignment: .leading
-                        )
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            if !isEditing {
-                                sheet = .foodDetail(food: food)
-                            }
-                        }
-                    
-                    Image(systemName: "pencil")
-                        .font(.title3.bold())
-                        .foregroundStyle(.accent)
-                        .offset(x: isEditing ? 0 : 60)
-                        .animation(.easeInOut(duration: 0.3), value: isEditing)
-                        .onTapGesture {
-                            sheet = .editFood(food: $food)
-                        }
-                }
-            }
+            List(
+                $foods,
+                editActions: .all,
+                selection: $selectedFoodIDs,
+                rowContent: buildFoodRow
+            )
             .listStyle(.plain)
             .padding(.horizontal)
         }
@@ -163,7 +143,31 @@ private extension FoodListView {
         }
         .mainButtonStyle(shape: .roundedRectangle(radius: 8))
     }
-    
+
+    func buildFoodRow(data: Binding<Food>) -> some View {
+        let food = data.wrappedValue
+        return HStack {
+            Text(food.name)
+                .padding(.vertical, 5)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    if !isEditing {
+                        sheet = .foodDetail(food: food)
+                    }
+                }
+
+            Image(systemName: "pencil")
+                .font(.title3.bold())
+                .foregroundStyle(.accent)
+                .offset(x: isEditing ? 0 : 60)
+                .animation(.easeInOut(duration: 0.3), value: isEditing)
+                .onTapGesture {
+                    sheet = .editFood(food: data)
+                }
+        }
+    }
+
     func buildFloatingButton() -> some View {
         ZStack {
             addButton
