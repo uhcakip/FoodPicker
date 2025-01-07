@@ -14,11 +14,13 @@ extension FoodListView {
         @Environment(\.colorScheme) var colorScheme
         @State private var food: Food
         @FocusState private var field: Field?
-        
+
+        let save: (Food) -> Void
         private let action: (text: String, image: String)
         
-        init(food: Food) {
+        init(food: Food, save: @escaping (Food) -> Void) {
             _food = State(initialValue: food)
+            self.save = save
             action = food.name.isEmpty ? (text: "Add", image: "plus") : (text: "Edit", image: "pencil")
         }
         
@@ -52,7 +54,8 @@ extension FoodListView {
                     .padding(.top, -16)
                     
                     Button {
-                        
+                        dismiss()
+                        save(food)
                     } label: {
                         Text(inValidMessage ?? "Save")
                             .frame(maxWidth: .infinity)
@@ -173,5 +176,5 @@ private extension FoodListView.FoodFormView {
 
 #Preview {
     @Previewable @State var food = Food.examples.first!
-    FoodListView.FoodFormView(food: food)
+    FoodListView.FoodFormView(food: food) { _ in }
 }
