@@ -10,11 +10,9 @@ import SwiftUI
 struct FoodListView: View {
     @ObserveInjection var inject
     @Environment(\.editMode) var editMode
-    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     @State private var foods = Food.examples
     @State private var selectedFoodIDs = Set<Food.ID>()
     @State private var tappedFood: Food?
-    @State private var foodInfoHeight = 0.0
     
     var isEditing: Bool {
         editMode?.wrappedValue.isEditing == true
@@ -53,7 +51,19 @@ struct FoodListView: View {
         .scrollIndicators(.hidden)
         .background(Color(.groupBg))
         .safeAreaInset(edge: .bottom, content: buildFloatingButton)
-        .sheet(item: $tappedFood) { food in
+        .sheet(item: $tappedFood) { FoodDetailView(food: $0) }
+        .enableInjection()
+    }
+}
+
+private extension FoodListView {
+    struct FoodDetailView: View {
+        @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+        @State private var foodInfoHeight = 0.0
+        
+        let food: Food
+        
+        var body: some View {
             let shouldUseVStack = dynamicTypeSize.isAccessibilitySize || food.image.count > 1
             
             AnyLayout.vhStack(isVertical: shouldUseVStack, spacing: 30) {
@@ -77,11 +87,15 @@ struct FoodListView: View {
             }
             .presentationDetents([.height(foodInfoHeight)])
         }
-        .enableInjection()
+        
+        private func buildNutritionGridRowView(title: String, value: String) -> some View {
+            GridRow {
+                Text(title).gridCellAnchor(.leading)
+                Text(value).gridCellAnchor(.trailing)
+            }
+        }
     }
-}
-
-private extension FoodListView {
+    
     var titleBar: some View {
         HStack {
             Label("Food List", systemImage: "fork.knife")
@@ -131,13 +145,6 @@ private extension FoodListView {
                 .offset(x: isEditing ? 0 : -60)
         }
         .animation(.easeInOut, value: isEditing)
-    }
-    
-    func buildNutritionGridRowView(title: String, value: String) -> some View {
-        GridRow {
-            Text(title).gridCellAnchor(.leading)
-            Text(value).gridCellAnchor(.trailing)
-        }
     }
 }
 
