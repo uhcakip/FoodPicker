@@ -152,9 +152,11 @@ private extension FoodListView {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    if !isEditing {
-                        sheet = .foodDetail(food: food)
+                    if isEditing {
+                        selectedFoodIDs.insert(food.id)
+                        return
                     }
+                    sheet = .foodDetail(food: food)
                 }
 
             Image(systemName: "pencil")
