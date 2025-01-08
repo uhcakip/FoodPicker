@@ -27,11 +27,11 @@ extension FoodListScreen {
         var body: some View {
             switch self {
             case .addFood(let save):
-                FoodListScreen.FoodFormView(food: Food.new, save: save)
+                FoodFormView(food: Food.new, save: save)
             case .editFood(let food):
-                FoodListScreen.FoodFormView(food: food.wrappedValue) { food.wrappedValue = $0 }
+                FoodFormView(food: food.wrappedValue) { food.wrappedValue = $0 }
             case .foodDetail(let food):
-                FoodListScreen.FoodDetailView(food: food)
+                FoodDetailView(food: food)
             }
         }
     }
