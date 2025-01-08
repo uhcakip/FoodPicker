@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E84DEAD62D1EA395005B7B97 /* FoodFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84DEAD52D1EA395005B7B97 /* FoodFormView.swift */; };
 		E8B112B32CF9B6530093A12A /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = E8B112B22CF9B6530093A12A /* Inject */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E84DEAD52D1EA395005B7B97 /* FoodFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodFormView.swift; sourceTree = "<group>"; };
 		E8BD6C5C2CEF2EBD00A7AADE /* FoodPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -39,7 +37,6 @@
 		E8BD6C532CEF2EBD00A7AADE = {
 			isa = PBXGroup;
 			children = (
-				E84DEAD52D1EA395005B7B97 /* FoodFormView.swift */,
 				E8BD6C5E2CEF2EBD00A7AADE /* FoodPicker */,
 				E8BD6C5D2CEF2EBD00A7AADE /* Products */,
 			);
@@ -131,7 +128,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E84DEAD62D1EA395005B7B97 /* FoodFormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
