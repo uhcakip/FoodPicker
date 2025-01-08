@@ -1,5 +1,5 @@
 //
-//  FoodListView.swift
+//  FoodListScreen.swift
 //  FoodPicker
 //
 //  Created by Yuna Chou on 2024/12/2.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FoodListView: View {
+struct FoodListScreen: View {
     @ObserveInjection var inject
     @Environment(\.editMode) var editMode
     @State private var foods = Food.examples
@@ -35,7 +35,7 @@ struct FoodListView: View {
     }
 }
 
-private extension FoodListView {
+private extension FoodListScreen {
     enum Sheet: View, Identifiable {
         case addFood(save: (Food) -> Void)
         case editFood(food: Binding<Food>)
@@ -55,11 +55,11 @@ private extension FoodListView {
         var body: some View {
             switch self {
             case .addFood(let save):
-                FoodListView.FoodFormView(food: Food.new, save: save)
+                FoodListScreen.FoodFormView(food: Food.new, save: save)
             case .editFood(let food):
-                FoodListView.FoodFormView(food: food.wrappedValue) { food.wrappedValue = $0 }
+                FoodListScreen.FoodFormView(food: food.wrappedValue) { food.wrappedValue = $0 }
             case .foodDetail(let food):
-                FoodListView.FoodDetailView(food: food)
+                FoodListScreen.FoodDetailView(food: food)
             }
         }
     }
@@ -186,10 +186,10 @@ private extension FoodListView {
 }
 
 #Preview {
-    FoodListView()
+    FoodListScreen()
 }
 
-#Preview("FoodListViewEditing") {
-    FoodListView()
+#Preview("FoodListScreen - isEditing") {
+    FoodListScreen()
         .environment(\.editMode, .constant(.active))
 }

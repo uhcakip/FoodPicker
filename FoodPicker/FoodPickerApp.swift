@@ -13,7 +13,7 @@ struct FoodPickerApp: App {
     var body: some Scene {
         WindowGroup {
             //FoodPickerScreen()
-            FoodListView()
+            FoodListScreen()
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension FoodListView {
+extension FoodListScreen {
     struct FoodFormView: View {
         @ObserveInjection var inject
         @Environment(\.dismiss) var dismiss
@@ -86,7 +86,7 @@ extension FoodListView {
     }
 }
 
-private extension FoodListView.FoodFormView {
+private extension FoodListScreen.FoodFormView {
     enum Field: Int {
         case name, emoji, calories, carb, fat, protein
         
@@ -176,5 +176,5 @@ private extension FoodListView.FoodFormView {
 
 #Preview {
     @Previewable @State var food = Food.examples.first!
-    FoodListView.FoodFormView(food: food) { _ in }
+    FoodListScreen.FoodFormView(food: food) { _ in }
 }
