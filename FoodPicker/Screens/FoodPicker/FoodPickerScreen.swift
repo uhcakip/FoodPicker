@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  FoodPickerScreen.swift
 //  FoodPicker
 //
 //  Created by Yuna Chou on 2024/11/21.
@@ -7,28 +7,28 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct FoodPickerScreen: View {
     let foods = Food.examples
     @State var selectedFood: Food?
     @State private var shouldShowFoodInfo = true
     @ScaledMetric private var foodImageSize = 200.0
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 30) {
                 foodImage
-                
+
                 Text("今天吃什麼?")
                     .bold()
-                
+
                 seletedFoodInfoView
-                
+
                 Spacer().layoutPriority(1)
-                
+
                 selectFoodButton
-                
+
                 resetButton
-                
+
             }
             .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height - 100)
             .padding()
@@ -42,7 +42,7 @@ struct ContentView: View {
 }
 
 // MARK: - Subviews
-private extension ContentView {
+private extension FoodPickerScreen {
     var foodImage: some View {
         Group {
             if let selectedFood {
@@ -58,7 +58,7 @@ private extension ContentView {
         }
         .frame(height: 250)
     }
-    
+
     @ViewBuilder
     var seletedFoodInfoView: some View {
         if let selectedFood {
@@ -67,7 +67,7 @@ private extension ContentView {
                 Text(selectedFood.name)
                     .foregroundStyle(Color.Catppuccin.peach)
                     .transition(.delayInsertionOpacity)
-                
+
                 Button {
                     withAnimation {
                         shouldShowFoodInfo.toggle()
@@ -81,11 +81,11 @@ private extension ContentView {
                 .buttonStyle(.plain)
             }
             .id(selectedFood.name)
-            
+
             // MARK: food calorie
             Text("熱量 \(selectedFood.$calorie)")
                 .font(.title2)
-            
+
             // MARK: food nutrition
             VStack {
                 if shouldShowFoodInfo {
@@ -96,11 +96,11 @@ private extension ContentView {
                             Text("碳水")
                         }
                         .frame(minWidth: 60)
-                        
+
                         Divider()
                             .gridCellUnsizedAxes(.horizontal)
                             .padding(.horizontal, -10)
-                        
+
                         GridRow {
                             Text("\(selectedFood.$protein)")
                             Text("\(selectedFood.$fat)")
@@ -118,7 +118,7 @@ private extension ContentView {
             .clipped()
         }
     }
-    
+
     var selectFoodButton: some View {
         Button {
             selectedFood = foods.filter {
@@ -131,7 +131,7 @@ private extension ContentView {
         }
         .padding(.bottom, -15)
     }
-    
+
     var resetButton: some View {
         Button {
             selectedFood = nil
@@ -144,13 +144,7 @@ private extension ContentView {
     }
 }
 
-// MARK: - For preview
-extension ContentView {
-    init(selectedFood: Food) {
-        _selectedFood = State(wrappedValue: selectedFood)
-    }
-}
-
+// MARK: - Previews
 #Preview {
-    ContentView(selectedFood: .examples.first!)
+    FoodPickerScreen(selectedFood: .examples.first!)
 }
