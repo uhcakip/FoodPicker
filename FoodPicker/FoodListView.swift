@@ -13,11 +13,7 @@ struct FoodListView: View {
     @State private var foods = Food.examples
     @State private var selectedFoodIDs = Set<Food.ID>()
     @State private var sheet: Sheet?
-    
-    var isEditing: Bool {
-        editMode?.wrappedValue.isEditing == true
-    }
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             titleBar
@@ -107,6 +103,10 @@ private extension FoodListView {
         }
     }
     
+    var isEditing: Bool {
+        editMode?.wrappedValue.isEditing == true
+    }
+
     var titleBar: some View {
         HStack {
             Label("Food List", systemImage: "fork.knife")
