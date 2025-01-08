@@ -20,4 +20,8 @@ extension View {
     ) -> some View {
         background(RoundedRectangle(cornerRadius: radius).fill(fill))
     }
+
+    func sheet(item: Binding<(some View & Identifiable)?>) -> some View {
+        sheet(item: item) { $0 }
+    }
 }
