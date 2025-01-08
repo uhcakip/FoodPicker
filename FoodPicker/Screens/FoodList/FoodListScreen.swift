@@ -12,7 +12,7 @@ struct FoodListScreen: View {
     @Environment(\.editMode) var editMode
     @State private var foods = Food.examples
     @State private var selectedFoodIDs = Set<Food.ID>()
-    @State private var sheet: Sheet?
+    @State private var sheet: FoodSheetView?
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -36,34 +36,6 @@ struct FoodListScreen: View {
 }
 
 private extension FoodListScreen {
-    enum Sheet: View, Identifiable {
-        case addFood(save: (Food) -> Void)
-        case editFood(food: Binding<Food>)
-        case foodDetail(food: Food)
-        
-        var id: UUID {
-            switch self {
-            case .addFood:
-                UUID()
-            case .editFood(let food):
-                food.id
-            case .foodDetail(let food):
-                food.id
-            }
-        }
-        
-        var body: some View {
-            switch self {
-            case .addFood(let save):
-                FoodListScreen.FoodFormView(food: Food.new, save: save)
-            case .editFood(let food):
-                FoodListScreen.FoodFormView(food: food.wrappedValue) { food.wrappedValue = $0 }
-            case .foodDetail(let food):
-                FoodListScreen.FoodDetailView(food: food)
-            }
-        }
-    }
-    
     var isEditing: Bool {
         editMode?.wrappedValue.isEditing == true
     }
