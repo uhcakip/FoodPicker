@@ -45,7 +45,7 @@ extension FoodListView {
                     
                     Form {
                         Field.name.buildString(value: $food.name, focusedField: $field)
-                        Field.emoji.buildString(value: $food.image, focusedField: $field)
+                        Field.emoji.buildString(value: $food.emoji, focusedField: $field)
                         Field.calories.buildNumber(value: $food.calorie, focusedField: $field)
                         Field.carb.buildNumber(value: $food.carb, focusedField: $field)
                         Field.fat.buildNumber(value: $food.fat, focusedField: $field)
@@ -148,12 +148,12 @@ private extension FoodListView.FoodFormView {
     }
     
     private var isInputInvalid: Bool {
-        food.name.isEmpty || food.image.count > 2
+        food.name.isEmpty || food.emoji.count > 2
     }
     
     private var inValidMessage: String? {
         if food.name.isEmpty { return "Name is required" }
-        if food.image.count > 2 { return "Emoji is too long" }
+        if food.emoji.count > 2 { return "Emoji is too long" }
         return nil
     }
     

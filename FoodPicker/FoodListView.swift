@@ -71,10 +71,10 @@ private extension FoodListView {
         let food: Food
         
         var body: some View {
-            let shouldUseVStack = dynamicTypeSize.isAccessibilitySize || food.image.count > 1
+            let shouldUseVStack = dynamicTypeSize.isAccessibilitySize || food.emoji.count > 1
             
             AnyLayout.vhStack(isVertical: shouldUseVStack, spacing: 30) {
-                Text(food.image)
+                Text(food.emoji)
                     .font(.system(size: 100))
                     .lineLimit(1)
                     .minimumScaleFactor(shouldUseVStack ? 1 : 0.5)

@@ -46,7 +46,7 @@ private extension ContentView {
     var foodImage: some View {
         Group {
             if let selectedFood {
-                Text(selectedFood.image)
+                Text(selectedFood.emoji)
                     .font(.system(size: foodImageSize))
                     .minimumScaleFactor(0.7)
                     .lineLimit(1)
