@@ -24,4 +24,27 @@ extension View {
     func sheet(item: Binding<(some View & Identifiable)?>) -> some View {
         sheet(item: item) { $0 }
     }
+
+    /// - Tag: hPush
+    ///
+    /// Expands the view to the full width of its container and aligns the content
+    /// horizontally according to the specified alignment.
+    ///
+    /// - Parameter alignment: The horizontal alignment for the content. Options
+    ///   are `.leading`, `.center`, and `.trailing`.
+    func hPush(to alignment: TextAlignment) -> some View {
+        switch alignment {
+        case .leading:
+            frame(maxWidth: .infinity, alignment: .leading)
+        case .center:
+            frame(maxWidth: .infinity)
+        case .trailing:
+            frame(maxWidth: .infinity, alignment: .trailing)
+        }
+    }
+
+    /// This is a shortcut for calling [`hPush(to:)`](x-source-tag://hPush) with `.center` alignment.
+    func maxWidth() -> some View {
+        hPush(to: .center)
+    }
 }

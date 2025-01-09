@@ -30,7 +30,8 @@ struct FoodPickerScreen: View {
                 resetButton
 
             }
-            .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height - 100)
+            .maxWidth()
+            .frame(minHeight: UIScreen.main.bounds.height - 100)
             .padding()
             .font(.title)
             .mainButtonStyle()
@@ -114,7 +115,7 @@ private extension FoodPickerScreen {
                     .transition(.moveUpWithOpacity)
                 }
             }
-            .frame(maxWidth: .infinity)
+            .maxWidth()
             .clipped()
         }
     }

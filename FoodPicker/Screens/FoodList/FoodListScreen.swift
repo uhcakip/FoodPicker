@@ -48,7 +48,7 @@ private extension FoodListScreen {
                 .fixedSize() // for dymatic font size (xxxLarge)
 
             EditButton()
-                .frame(maxWidth: .infinity, alignment: .trailing)
+                .hPush(to: .trailing)
                 .buttonStyle(.bordered)
         }
         .padding()
@@ -82,7 +82,7 @@ private extension FoodListScreen {
         return HStack {
             Text(food.name)
                 .padding(.vertical, 5)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .hPush(to: .leading)
                 .contentShape(Rectangle())
                 .onTapGesture {
                     if isEditing {
@@ -108,7 +108,7 @@ private extension FoodListScreen {
             addButton
                 .opacity(isEditing ? 0 : 1)
                 .scaleEffect(isEditing ? 0 : 1)
-                .frame(maxWidth: .infinity, alignment: .trailing)
+                .hPush(to: .trailing)
 
             removeSelectionsButton
                 .opacity(isEditing ? 1 : 0)

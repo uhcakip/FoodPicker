@@ -31,7 +31,7 @@ extension FoodListScreen {
                         actionLabel
                             .font(.title.bold())
                             .foregroundStyle(.accent)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .hPush(to: .leading)
 
                         Button {
                             dismiss()
@@ -58,7 +58,7 @@ extension FoodListScreen {
                         save(food)
                     } label: {
                         Text(inValidMessage ?? "Save")
-                            .frame(maxWidth: .infinity)
+                            .maxWidth()
                             .foregroundStyle(isInputInvalid ? .secondary : Color.Catppuccin.buttonText)
                     }
                     .mainButtonStyle()
