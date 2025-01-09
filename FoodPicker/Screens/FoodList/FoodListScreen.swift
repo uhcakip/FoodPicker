@@ -35,6 +35,7 @@ struct FoodListScreen: View {
     }
 }
 
+// MARK: - Subviews
 private extension FoodListScreen {
     var isEditing: Bool {
         editMode?.wrappedValue.isEditing == true
@@ -118,6 +119,7 @@ private extension FoodListScreen {
     }
 }
 
+// MARK: - Previews
 #Preview {
     FoodListScreen()
 }

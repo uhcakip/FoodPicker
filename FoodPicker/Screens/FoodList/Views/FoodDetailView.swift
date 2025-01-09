@@ -48,6 +48,7 @@ extension FoodListScreen {
     }
 }
 
+// MARK: - Previews
 #Preview {
     @Previewable @State var food = Food.examples.first!
     FoodListScreen.FoodDetailView(food: food)

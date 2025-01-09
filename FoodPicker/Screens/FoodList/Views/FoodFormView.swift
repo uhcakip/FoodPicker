@@ -14,7 +14,6 @@ extension FoodListScreen {
         @Environment(\.colorScheme) var colorScheme
         @State private var food: Food
         @FocusState private var field: Field?
-
         let save: (Food) -> Void
         private let actionLabel: Label<Text, Image>
 
@@ -22,6 +21,16 @@ extension FoodListScreen {
             _food = State(initialValue: food)
             self.save = save
             actionLabel = food.name.isEmpty ? Label("Add", symbol: .plus) : Label("Edit", symbol: .pencil)
+        }
+
+        private var isInputInvalid: Bool {
+            food.name.isEmpty || food.emoji.count > 2
+        }
+
+        private var inValidMessage: String? {
+            if food.name.isEmpty { return "Name is required" }
+            if food.emoji.count > 2 { return "Emoji is too long" }
+            return nil
         }
 
         var body: some View {
@@ -77,20 +86,6 @@ extension FoodListScreen {
 }
 
 // MARK: - Subviews
-private extension FoodListScreen.FoodFormView {
-    func buildKeyboardToolbar() -> some ToolbarContent {
-        ToolbarItemGroup(placement: .keyboard) {
-            Spacer()
-            Button(action: goPrevField) {
-                Image(symbol: .chevronUp)
-            }
-            Button(action: goNextField) {
-                Image(symbol: .chevronDown)
-            }
-        }
-    }
-}
-
 private extension FoodListScreen.FoodFormView {
     enum Field: Int {
         case name, emoji, calories, carb, fat, protein
@@ -152,16 +147,21 @@ private extension FoodListScreen.FoodFormView {
         }
     }
 
-    private var isInputInvalid: Bool {
-        food.name.isEmpty || food.emoji.count > 2
+    func buildKeyboardToolbar() -> some ToolbarContent {
+        ToolbarItemGroup(placement: .keyboard) {
+            Spacer()
+            Button(action: goPrevField) {
+                Image(symbol: .chevronUp)
+            }
+            Button(action: goNextField) {
+                Image(symbol: .chevronDown)
+            }
+        }
     }
+}
 
-    private var inValidMessage: String? {
-        if food.name.isEmpty { return "Name is required" }
-        if food.emoji.count > 2 { return "Emoji is too long" }
-        return nil
-    }
-
+// MARK: - Focus Handling
+private extension FoodListScreen.FoodFormView {
     private func goPrevField() {
         if let currentField = field {
             field = .init(
@@ -179,6 +179,7 @@ private extension FoodListScreen.FoodFormView {
     }
 }
 
+// MARK: - Previews
 #Preview {
     @Previewable @State var food = Food.examples.first!
     FoodListScreen.FoodFormView(food: food) { _ in }
