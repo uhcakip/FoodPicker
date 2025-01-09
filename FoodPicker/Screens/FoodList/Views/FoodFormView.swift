@@ -69,19 +69,24 @@ extension FoodListScreen {
                 .multilineTextAlignment(.trailing)
                 .font(.title3)
                 .scrollDismissesKeyboard(.interactively)
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Spacer()
-                        Button(action: goPrevField) {
-                            Image(symbol: .chevronUp)
-                        }
-                        Button(action: goNextField) {
-                            Image(symbol: .chevronDown)
-                        }
-                    }
-                }
+                .toolbar(content: buildKeyboardToolbar)
             }
             .enableInjection()
+        }
+    }
+}
+
+// MARK: - Subviews
+private extension FoodListScreen.FoodFormView {
+    func buildKeyboardToolbar() -> some ToolbarContent {
+        ToolbarItemGroup(placement: .keyboard) {
+            Spacer()
+            Button(action: goPrevField) {
+                Image(symbol: .chevronUp)
+            }
+            Button(action: goNextField) {
+                Image(symbol: .chevronDown)
+            }
         }
     }
 }
