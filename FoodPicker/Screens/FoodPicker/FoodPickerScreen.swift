@@ -73,7 +73,7 @@ private extension FoodPickerScreen {
                         shouldShowFoodInfo.toggle()
                     }
                 } label: {
-                    Image(systemName: "info.circle.fill")
+                    Image(symbol: .infoFill)
                         .font(.title)
                         .foregroundStyle(
                             Color.Catppuccin.peach.opacity(0.5))

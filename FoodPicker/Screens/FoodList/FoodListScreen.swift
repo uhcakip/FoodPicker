@@ -17,7 +17,7 @@ struct FoodListScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             titleBar
-            
+
             List(
                 $foods,
                 editActions: .all,
@@ -42,30 +42,30 @@ private extension FoodListScreen {
 
     var titleBar: some View {
         HStack {
-            Label("Food List", systemImage: "fork.knife")
+            Label("Food List", symbol: .forkKnife)
                 .font(.title.bold())
                 .foregroundStyle(.accent)
                 .fixedSize() // for dymatic font size (xxxLarge)
-            
+
             EditButton()
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .buttonStyle(.bordered)
         }
         .padding()
     }
-    
+
     var addButton: some View {
         Button {
             sheet = .addFood { foods.append($0) }
         } label: {
-            Image(systemName: "plus.circle.fill")
+            Image(symbol: .plusFill)
                 .font(.system(size: 50))
                 .padding()
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(.white, .accent.gradient)
         }
     }
-    
+
     var removeSelectionsButton: some View {
         Button {
             foods = foods.filter { !selectedFoodIDs.contains($0.id) }
@@ -92,7 +92,7 @@ private extension FoodListScreen {
                     sheet = .foodDetail(food: food)
                 }
 
-            Image(systemName: "pencil")
+            Image(symbol: .pencil)
                 .font(.title3.bold())
                 .foregroundStyle(.accent)
                 .offset(x: isEditing ? 0 : 60)
