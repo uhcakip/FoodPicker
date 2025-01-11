@@ -82,6 +82,7 @@ private extension FoodListScreen {
         let food = data.wrappedValue
         return HStack {
             Text(food.name)
+                .font(.title3)
                 .padding(.vertical, 5)
                 .hPush(to: .leading)
                 .contentShape(Rectangle())

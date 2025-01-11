@@ -33,7 +33,7 @@ struct FoodPickerScreen: View {
             .maxWidth()
             .frame(minHeight: UIScreen.main.bounds.height - 100)
             .padding()
-            .font(.title)
+            .font(.title2.bold())
             .mainButtonStyle()
             .animation(.fpEase, value: selectedFood)
             .animation(.fpSpring, value: shouldShowFoodInfo)
