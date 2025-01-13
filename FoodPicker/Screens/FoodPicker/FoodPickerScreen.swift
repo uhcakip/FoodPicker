@@ -15,31 +15,33 @@ struct FoodPickerScreen: View {
     let foods = Food.examples
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 30) {
-                foodImage
+        GeometryReader { proxy in
+            ScrollView {
+                VStack(spacing: 30) {
+                    foodImage
 
-                Text("今天吃什麼?")
-                    .bold()
+                    Text("今天吃什麼?")
+                        .bold()
 
-                seletedFoodInfoView
+                    seletedFoodInfoView
 
-                Spacer().layoutPriority(1)
+                    Spacer().layoutPriority(1)
 
-                selectFoodButton
+                    selectFoodButton
 
-                resetButton
+                    resetButton
 
+                }
+                .padding()
+                .maxWidth()
+                .frame(minHeight: proxy.size.height)
+                .font(.title2.bold())
+                .mainButtonStyle()
+                .animation(.fpEase, value: selectedFood)
+                .animation(.fpSpring, value: shouldShowFoodInfo)
             }
-            .maxWidth()
-            .frame(minHeight: UIScreen.main.bounds.height - 100)
-            .padding()
-            .font(.title2.bold())
-            .mainButtonStyle()
-            .animation(.fpEase, value: selectedFood)
-            .animation(.fpSpring, value: shouldShowFoodInfo)
+            .background(.secondBg)
         }
-        .background(.secondBg)
         .enableInjection()
     }
 }
