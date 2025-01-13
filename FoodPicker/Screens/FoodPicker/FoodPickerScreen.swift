@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FoodPickerScreen: View {
+    @ObserveInjection var inject
     @State var selectedFood: Food?
     @State private var shouldShowFoodInfo = true
     @ScaledMetric private var foodImageSize = 200.0
@@ -39,6 +40,7 @@ struct FoodPickerScreen: View {
             .animation(.fpSpring, value: shouldShowFoodInfo)
         }
         .background(.secondBg)
+        .enableInjection()
     }
 }
 
