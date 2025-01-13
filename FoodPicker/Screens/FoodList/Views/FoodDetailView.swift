@@ -11,7 +11,6 @@ extension FoodListScreen {
     struct FoodDetailView: View {
         @Environment(\.dynamicTypeSize) private var dynamicTypeSize
         @State private var foodInfoHeight = 0.0
-
         let food: Food
 
         var body: some View {

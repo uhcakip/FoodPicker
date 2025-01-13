@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct FoodPickerScreen: View {
-    let foods = Food.examples
     @State var selectedFood: Food?
     @State private var shouldShowFoodInfo = true
     @ScaledMetric private var foodImageSize = 200.0
+    let foods = Food.examples
 
     var body: some View {
         ScrollView {
