@@ -21,7 +21,7 @@ struct FoodPickerScreen: View {
                     foodImage
 
                     Text("今天吃什麼?")
-                        .bold()
+                        .font(.title.bold())
 
                     seletedFoodInfoView
 
@@ -70,6 +70,7 @@ private extension FoodPickerScreen {
             // MARK: food name & info button
             HStack {
                 Text(selectedFood.name)
+                    .font(.largeTitle.bold())
                     .foregroundStyle(Color.Catppuccin.peach)
                     .transition(.delayInsertionOpacity)
 

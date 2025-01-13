@@ -28,7 +28,7 @@ struct FoodListScreen: View {
             .padding(.horizontal)
         }
         .scrollIndicators(.hidden)
-        .background(Color(.groupBg))
+        .background(.groupBg)
         .safeAreaInset(edge: .bottom, content: buildFloatingButton)
         .sheet(item: $sheet)
         .enableInjection()
