@@ -25,7 +25,8 @@ struct FoodPickerScreen: View {
 
                     seletedFoodInfoView
 
-                    Spacer().layoutPriority(1)
+                    Spacer()
+                        .layoutPriority(1)
 
                     selectFoodButton
 
