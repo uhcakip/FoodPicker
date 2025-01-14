@@ -13,7 +13,9 @@ enum SFSymbol: String {
     case pencil = "pencil"
     case chevronUp = "chevron.up"
     case chevronDown = "chevron.down"
+    case list = "list.bullet"
     case infoFill = "info.circle.fill"
     case plusFill = "plus.circle.fill"
     case xmarkFill = "xmark.circle.fill"
+    case houseFill = "house.fill"
 }
