@@ -49,8 +49,10 @@ private extension FoodListScreen {
                 .fixedSize() // for dymatic font size (xxxLarge)
 
             EditButton()
-                .hPush(to: .trailing)
                 .buttonStyle(.bordered)
+                .hPush(to: .trailing)
+
+            addButton
         }
         .padding()
     }
@@ -60,8 +62,7 @@ private extension FoodListScreen {
             sheet = .addFood { foods.append($0) }
         } label: {
             Image(symbol: .plusFill)
-                .font(.system(size: 50))
-                .padding()
+                .font(.system(size: 35))
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(.white, .accent.gradient)
         }
@@ -83,7 +84,7 @@ private extension FoodListScreen {
         return HStack {
             Text(food.name)
                 .font(.title3)
-                .padding(.vertical, 5)
+                .padding(.vertical, 10)
                 .hPush(to: .leading)
                 .contentShape(Rectangle())
                 .onTapGesture {
@@ -106,17 +107,11 @@ private extension FoodListScreen {
     }
 
     func buildFloatingButton() -> some View {
-        ZStack {
-            addButton
-                .opacity(isEditing ? 0 : 1)
-                .scaleEffect(isEditing ? 0 : 1)
-                .hPush(to: .trailing)
-
-            removeSelectionsButton
-                .opacity(isEditing ? 1 : 0)
-                .offset(x: isEditing ? 0 : -60)
-        }
-        .animation(.easeInOut, value: isEditing)
+        removeSelectionsButton
+            .padding(.bottom, 10)
+            .opacity(isEditing ? 1 : 0)
+            .offset(x: isEditing ? 0 : -60)
+            .animation(.easeInOut, value: isEditing)
     }
 }
 
