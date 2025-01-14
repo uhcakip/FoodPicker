@@ -9,48 +9,33 @@ import SwiftUI
 
 struct HomeScreen: View {
     @ObserveInjection var inject
-    @State private var selectedTab: TabItem = .home
+    @State private var selectedTab: TabItem.RawValue = TabItem.home.rawValue
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            ForEach(TabItem.allCases, id: \.self) { $0 }
+            ForEach(TabItem.allCases) {
+                Tab(symbol: $0.symbol, value: $0.rawValue, content: $0.content)
+            }
         }
         .enableInjection()
     }
 }
 
 extension HomeScreen {
-    enum TabItem: View, CaseIterable {
+    enum TabItem: String, CaseIterable {
         case home, list
-
-        var body: some View {
-            content
-                .tabItem {
-                    Label(title, symbol: symbol)
-                        .labelStyle(.iconOnly)
-                }
-        }
-
-        var title: LocalizedStringKey {
-            switch self {
-            case .home:
-                "Home"
-            case .list:
-                "List"
-            }
-        }
 
         var symbol: SFSymbol {
             switch self {
             case .home:
-                    .houseFill
+                .houseFill
             case .list:
-                    .list
+                .list
             }
         }
 
         @ViewBuilder
-        var content: some View {
+        func content() -> some View {
             switch self {
             case .home:
                 FoodPickerScreen()
