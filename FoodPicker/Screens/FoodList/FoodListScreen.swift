@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FoodListScreen: View {
     @ObserveInjection var inject
-    @Environment(\.editMode) var editMode
+    @State private var editMode: EditMode = .inactive
     @State private var foods = Food.examples
     @State private var selectedFoodIDs = Set<Food.ID>()
     @State private var sheet: FoodSheetView?
@@ -27,6 +27,7 @@ struct FoodListScreen: View {
             .listStyle(.plain)
             .padding(.horizontal)
         }
+        .environment(\.editMode, $editMode)
         .scrollIndicators(.hidden)
         .background(.groupBg)
         .safeAreaInset(edge: .bottom, content: buildFloatingButton)
@@ -38,7 +39,7 @@ struct FoodListScreen: View {
 // MARK: - Subviews
 private extension FoodListScreen {
     var isEditing: Bool {
-        editMode?.wrappedValue.isEditing == true
+        editMode.isEditing
     }
 
     var titleBar: some View {
