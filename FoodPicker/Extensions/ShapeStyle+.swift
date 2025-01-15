@@ -11,4 +11,5 @@ extension ShapeStyle where Self == Color {
     static var mainBg: Color { Self(.systemBackground) }
     static var secondBg: Color { Self(.secondarySystemBackground) }
     static var groupBg: Color { Self(.systemGroupedBackground) }
+    static var secondGroupBg: Color { Self(.secondarySystemGroupedBackground) }
 }

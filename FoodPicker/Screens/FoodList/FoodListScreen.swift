@@ -25,6 +25,11 @@ struct FoodListScreen: View {
                 rowContent: buildFoodRow
             )
             .listStyle(.plain)
+            .background {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.secondGroupBg)
+                    .ignoresSafeArea()
+            }
             .padding(.horizontal)
         }
         .environment(\.editMode, $editMode)
@@ -105,6 +110,7 @@ private extension FoodListScreen {
                     sheet = .editFood(food: data)
                 }
         }
+        .listRowBackground(Color.clear)
     }
 
     func buildFloatingButton() -> some View {
