@@ -22,8 +22,10 @@ struct HomeScreen: View {
 }
 
 extension HomeScreen {
-    enum TabItem: String, CaseIterable {
-        case home, list
+    enum TabItem: String, CaseIterable, Identifiable {
+        case home, list, setting
+
+        var id: Self { self }
 
         var symbol: SFSymbol {
             switch self {
@@ -31,6 +33,8 @@ extension HomeScreen {
                 .houseFill
             case .list:
                 .list
+            case .setting:
+                .gear
             }
         }
 
@@ -41,6 +45,8 @@ extension HomeScreen {
                 FoodPickerScreen()
             case .list:
                 FoodListScreen()
+            case .setting:
+                SettingScreen()
             }
         }
     }
