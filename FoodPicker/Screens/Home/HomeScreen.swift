@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeScreen: View {
     @ObserveInjection var inject
     @State private var selectedTab: TabItem.RawValue = TabItem.home.rawValue
+    @AppStorage(.shouldUseDarkMode) private var shouldUseDarkMode = false
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -17,6 +18,7 @@ struct HomeScreen: View {
                 Tab(symbol: $0.symbol, value: $0.rawValue, content: $0.content)
             }
         }
+        .preferredColorScheme(shouldUseDarkMode ? .dark : .light)
         .enableInjection()
     }
 }

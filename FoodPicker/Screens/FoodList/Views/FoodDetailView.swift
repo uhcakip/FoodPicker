@@ -30,6 +30,8 @@ extension FoodListScreen {
                 }
             }
             .padding()
+            .maxWidth()
+            .background(.secondGroupBg)
             .onGeometryChange(for: CGFloat.self) {
                 $0.size.height
             } action: {
