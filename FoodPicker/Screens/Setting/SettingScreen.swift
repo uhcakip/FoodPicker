@@ -10,9 +10,9 @@ import SwiftUI
 
 struct SettingScreen: View {
     @ObserveInjection var inject
-    @State private var shouldUseDarkMode = false
-    @State private var selectedUnit = UnitView.gram
-    @State private var selectedTab = HomeScreen.TabItem.home
+    @AppStorage(.shouldUseDarkMode) private var shouldUseDarkMode = false
+    @AppStorage(.selectedUnit) private var selectedUnit = UnitView.gram
+    @AppStorage(.selectedTab) private var selectedTab = HomeScreen.TabItem.home
     @State private var dialog: Dialog = .none
 
     private var shouldShowDialog: Binding<Bool> {
