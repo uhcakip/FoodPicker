@@ -57,9 +57,7 @@ struct SettingScreen: View {
             isPresented: shouldShowDialog,
             titleVisibility: .visible,
             actions: {
-                Button("OK", role: .destructive) {
-                    // TODO: add action
-                }
+                Button("OK", role: .destructive, action: dialog.action)
                 Button("NO", role: .cancel) {}
             },
             message: {
@@ -93,6 +91,21 @@ extension SettingScreen {
                     ""
                 }
             return result + "\nThis action cannot be undone. \nAre you sure you want to proceed?"
+        }
+
+        func action() {
+            switch self {
+            case .resetSettings:
+                let keys = [StorageKey.shouldUseDarkMode, .selectedUnit, .selectedTab]
+                for key in keys {
+                    UserDefaults.standard.removeObject(forKey: key.rawValue)
+                }
+            case .resetFoodList:
+                // TODO: add action
+                return
+            case .none:
+                return
+            }
         }
     }
 }
