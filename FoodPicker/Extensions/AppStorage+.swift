@@ -20,6 +20,14 @@ extension AppStorage {
         wrappedValue: Value,
         _ key: StorageKey,
         store: UserDefaults? = nil
+    ) where Value == String {
+        self.init(wrappedValue: wrappedValue, key.rawValue, store: store)
+    }
+
+    init(
+        wrappedValue: Value,
+        _ key: StorageKey,
+        store: UserDefaults? = nil
     ) where Value: RawRepresentable, Value.RawValue == String {
         self.init(wrappedValue: wrappedValue, key.rawValue, store: store)
     }

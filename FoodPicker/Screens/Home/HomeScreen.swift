@@ -9,7 +9,10 @@ import SwiftUI
 
 struct HomeScreen: View {
     @ObserveInjection var inject
-    @State private var selectedTab: TabItem.RawValue = TabItem.home.rawValue
+    @State private var selectedTab: TabItem.RawValue = {
+        @AppStorage(.selectedTab) var tab = TabItem.home.rawValue
+        return tab
+    }()
     @AppStorage(.shouldUseDarkMode) private var shouldUseDarkMode = false
 
     var body: some View {
