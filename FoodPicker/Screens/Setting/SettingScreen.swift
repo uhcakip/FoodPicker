@@ -101,8 +101,7 @@ extension SettingScreen {
                     UserDefaults.standard.removeObject(forKey: key.rawValue)
                 }
             case .resetFoodList:
-                // TODO: add action
-                return
+                UserDefaults.standard.removeObject(forKey: StorageKey.foodList.rawValue)
             case .none:
                 return
             }

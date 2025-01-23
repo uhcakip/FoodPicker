@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Food: Equatable, Identifiable {
-    let id = UUID()
+struct Food: Equatable, Identifiable, Codable {
+    var id = UUID()
     var name: String
     var emoji: String
     @Suffix("大卡") var calorie: Double = .zero

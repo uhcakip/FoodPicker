@@ -11,4 +11,5 @@ enum StorageKey: String {
     case shouldUseDarkMode
     case selectedUnit
     case selectedTab
+    case foodList
 }

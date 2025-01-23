@@ -8,7 +8,7 @@
 import Foundation
 
 @propertyWrapper
-struct Suffix: Equatable {
+struct Suffix: Equatable, Codable {
     var wrappedValue: Double
     private let suffix: String
     
