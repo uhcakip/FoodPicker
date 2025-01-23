@@ -5,7 +5,7 @@
 //  Created by Yuna Chou on 2024/11/25.
 //
 
-import Foundation
+import SwiftUI
 
 @propertyWrapper
 struct Suffix: Equatable, Codable {
@@ -19,5 +19,55 @@ struct Suffix: Equatable, Codable {
     
     var projectedValue: String {
         wrappedValue.formatted() + " \(suffix)"
+    }
+}
+
+/// A property wrapper designed as a replacement for AppStorage, meant to store
+/// Codable values in UserDefaults. This wrapper manages encoding and decoding
+/// the value to and from Data using a JSON encoder and decoder automatically.
+///
+/// This is particularly useful for storing complex data types in UserDefaults
+/// with the simplicity of SwiftUI Bindings.
+///
+/// ```swift
+/// struct SettingScreen: View {
+///     @AppStorageCodable(.shouldUseDarkMode) private var shouldUseDarkMode = false
+///
+///     var body: some View {
+///         Toggle("Dark Mode", isOn: $shouldUseDarkMode)
+///         // other views...
+///     }
+/// }
+/// ```
+@propertyWrapper
+struct AppStorageCodable<Value: Codable>: DynamicProperty {
+    @AppStorage private var data: Data
+    private let key: StorageKey.RawValue
+    private let defaultValue: Value
+    private let decoder = JSONDecoder()
+    private let encoder = JSONEncoder()
+
+    init(wrappedValue: Value, _ key: StorageKey, store: UserDefaults? = nil) {
+        self.key = key.rawValue
+        self.defaultValue = wrappedValue
+        _data = .init(
+            wrappedValue: (try? encoder.encode(defaultValue)) ?? Data(),
+            key.rawValue,
+            store: store
+        )
+    }
+
+    /// The decoded value stored in UserDefaults or the default value.
+    public var wrappedValue: Value {
+        get { (try? decoder.decode(Value.self, from: data)) ?? defaultValue }
+        nonmutating set { data = (try? encoder.encode(newValue)) ?? data }
+    }
+
+    /// A Binding to the stored value, allowing for two-way data flow.
+    var projectedValue: Binding<Value> {
+        Binding(
+            get: { wrappedValue },
+            set: { wrappedValue = $0 }
+        )
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum UnitView: String, View, CaseIterable, Identifiable {
+enum UnitView: String, View, CaseIterable, Identifiable, Codable {
     case gram = "g"
     case pound = "lb"
 

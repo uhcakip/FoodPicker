@@ -10,10 +10,10 @@ import SwiftUI
 struct HomeScreen: View {
     @ObserveInjection var inject
     @State private var selectedTab: TabItem.RawValue = {
-        @AppStorage(.selectedTab) var tab = TabItem.home.rawValue
+        @AppStorageCodable(.selectedTab) var tab = TabItem.home.rawValue
         return tab
     }()
-    @AppStorage(.shouldUseDarkMode) private var shouldUseDarkMode = false
+    @AppStorageCodable(.shouldUseDarkMode) private var shouldUseDarkMode = false
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -27,7 +27,7 @@ struct HomeScreen: View {
 }
 
 extension HomeScreen {
-    enum TabItem: String, CaseIterable, Identifiable {
+    enum TabItem: String, CaseIterable, Identifiable, Codable {
         case home, list, setting
 
         var id: Self { self }
