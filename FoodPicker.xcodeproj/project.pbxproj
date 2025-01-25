@@ -57,6 +57,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8BD6C6A2CEF2EC000A7AADE /* Build configuration list for PBXNativeTarget "FoodPicker" */;
 			buildPhases = (
+				E83744282D435FDA007AB212 /* Run swift-format */,
 				E8BD6C582CEF2EBD00A7AADE /* Sources */,
 				E8BD6C592CEF2EBD00A7AADE /* Frameworks */,
 				E8BD6C5A2CEF2EBD00A7AADE /* Resources */,
@@ -123,6 +124,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E83744282D435FDA007AB212 /* Run swift-format */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run swift-format";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if ! output=$(swift format lint . -r 2>&1) && ! output=$(xcrun swift-format lint . -r 2>&1); then\n  echo \"error: swift-format is not installed. Please refer to https://github.com/swiftlang/swift-format for more information.\"\nelse\n  echo \"$output\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E8BD6C582CEF2EBD00A7AADE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -171,7 +194,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -238,7 +261,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
