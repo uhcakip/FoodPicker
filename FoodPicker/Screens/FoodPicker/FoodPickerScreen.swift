@@ -20,7 +20,7 @@ struct FoodPickerScreen: View {
                 VStack(spacing: 30) {
                     foodImage
 
-                    Text("今天吃什麼?")
+                    Text("What to eat today?")
                         .font(.title.bold())
 
                     seletedFoodInfoView
@@ -89,7 +89,7 @@ extension FoodPickerScreen {
             .id(selectedFood.name)
 
             // MARK: food calorie
-            Text("熱量 \(selectedFood.$calorie)")
+            Text("Calories \(selectedFood.$calorie)")
                 .font(.title2)
 
             // MARK: food nutrition
@@ -97,9 +97,9 @@ extension FoodPickerScreen {
                 if shouldShowFoodInfo {
                     Grid(horizontalSpacing: 12, verticalSpacing: 12) {
                         GridRow {
-                            Text("蛋白質")
-                            Text("脂肪")
-                            Text("碳水")
+                            Text("Protein")
+                            Text("Fat")
+                            Text("Carb")
                         }
                         .frame(minWidth: 60)
 
@@ -133,7 +133,7 @@ extension FoodPickerScreen {
                 }
                 .randomElement()
         } label: {
-            Text(selectedFood == nil ? "告訴我" : "換一個")
+            Text(selectedFood == nil ? "Tell me" : "Change")
                 .frame(width: 200)
                 .transformEffect(.identity)
         }
@@ -145,7 +145,7 @@ extension FoodPickerScreen {
             selectedFood = nil
             shouldShowFoodInfo = false
         } label: {
-            Text("重置")
+            Text("Reset")
                 .frame(width: 200)
         }
         .buttonStyle(.bordered)

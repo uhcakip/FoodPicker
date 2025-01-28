@@ -23,10 +23,10 @@ extension FoodListScreen {
                     .minimumScaleFactor(shouldUseVStack ? 1 : 0.5)
 
                 Grid(horizontalSpacing: 12, verticalSpacing: 12) {
-                    buildNutritionGridRowView(title: "熱量", value: food.$calorie)
-                    buildNutritionGridRowView(title: "蛋白質", value: food.$protein)
-                    buildNutritionGridRowView(title: "脂肪", value: food.$fat)
-                    buildNutritionGridRowView(title: "碳水", value: food.$carb)
+                    buildNutritionGridRowView(title: "Calories", value: food.$calorie)
+                    buildNutritionGridRowView(title: "Protein", value: food.$protein)
+                    buildNutritionGridRowView(title: "Fat", value: food.$fat)
+                    buildNutritionGridRowView(title: "Carb", value: food.$carb)
                 }
             }
             .padding()
