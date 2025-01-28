@@ -11,7 +11,7 @@ import SwiftUI
 struct SettingScreen: View {
     @ObserveInjection var inject
     @AppStorageCodable(.shouldUseDarkMode) private var shouldUseDarkMode = false
-    @AppStorageCodable(.selectedUnit) private var selectedUnit = UnitView.gram
+    @AppStorageCodable(.selectedUnit) private var selectedUnit = Unit.gram
     @AppStorageCodable(.selectedTab) private var selectedTab = HomeScreen.TabItem.home
     @State private var dialog: Dialog = .none
 
@@ -30,7 +30,9 @@ struct SettingScreen: View {
                         .tint(.accent)
 
                     Picker("Unit", symbol: .numberSign, selection: $selectedUnit) {
-                        ForEach(UnitView.allCases) { $0 }
+                        ForEach(Unit.allCases) {
+                            Text($0.rawValue)
+                        }
                     }
 
                     Picker("Initial Tab", symbol: .squares, selection: $selectedTab) {

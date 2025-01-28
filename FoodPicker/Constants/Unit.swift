@@ -1,5 +1,5 @@
 //
-//  UnitView.swift
+//  Unit.swift
 //  FoodPicker
 //
 //  Created by Yuna Chou on 2025/1/17.
@@ -7,13 +7,9 @@
 
 import SwiftUI
 
-enum UnitView: String, View, CaseIterable, Identifiable, Codable {
+enum Unit: String, CaseIterable, Identifiable, Codable {
     case gram = "g"
     case pound = "lb"
 
     var id: Self { self }
-
-    var body: some View {
-        Text(rawValue)
-    }
 }
