@@ -68,7 +68,7 @@ extension FoodListScreen {
                     } label: {
                         Text(inValidMessage ?? "Save")
                             .maxWidth()
-                            .foregroundStyle(isInputInvalid ? .secondary : Color.Catppuccin.buttonText)
+                            .foregroundStyle(isInputInvalid ? .secondary : .primary)
                     }
                     .mainButtonStyle()
                     .padding()

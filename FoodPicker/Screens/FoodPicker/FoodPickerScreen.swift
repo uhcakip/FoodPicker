@@ -72,7 +72,7 @@ extension FoodPickerScreen {
             HStack {
                 Text(selectedFood.name)
                     .font(.largeTitle.bold())
-                    .foregroundStyle(Color.Catppuccin.peach)
+                    .foregroundStyle(.accent)
                     .transition(.delayInsertionOpacity)
 
                 Button {
@@ -82,7 +82,7 @@ extension FoodPickerScreen {
                 } label: {
                     Image(symbol: .infoFill)
                         .font(.title)
-                        .foregroundStyle(Color.Catppuccin.peach.opacity(0.5))
+                        .foregroundStyle(.white, .accent)
                 }
                 .buttonStyle(.plain)
             }
