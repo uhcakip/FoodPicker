@@ -121,7 +121,7 @@ extension FoodListScreen.FoodFormView {
 
         func buildString(
             value: Binding<String>,
-            focusedField: FocusState<Field?>.Binding
+            focusedField: FocusState<Self?>.Binding
         ) -> some View {
             LabeledContent(title) {
                 TextField(placeholder, text: value)
@@ -134,7 +134,7 @@ extension FoodListScreen.FoodFormView {
 
         func buildNumber(
             value: Binding<Double>,
-            focusedField: FocusState<Field?>.Binding
+            focusedField: FocusState<Self?>.Binding
         ) -> some View {
             LabeledContent(title) {
                 HStack {

@@ -74,7 +74,7 @@ extension SettingScreen {
         case resetFoodList = "Reset Food List"
         case none
 
-        static var allCases = [Dialog.resetSettings, .resetFoodList]
+        static var allCases = [Self.resetSettings, .resetFoodList]
 
         var id: Self { self }
 
