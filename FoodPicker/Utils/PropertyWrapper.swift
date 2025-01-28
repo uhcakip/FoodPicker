@@ -11,20 +11,19 @@ import SwiftUI
 struct Suffix: Equatable, Codable {
     var wrappedValue: Double
     private let suffix: String
-    
+
     init(wrappedValue: Double, _ suffix: String) {
         self.wrappedValue = wrappedValue
         self.suffix = suffix
     }
-    
+
     var projectedValue: String {
         wrappedValue.formatted() + " \(suffix)"
     }
 }
 
-/// A property wrapper designed as a replacement for AppStorage, meant to store
-/// Codable values in UserDefaults. This wrapper manages encoding and decoding
-/// the value to and from Data using a JSON encoder and decoder automatically.
+/// A property wrapper that extends `AppStorage` to support storing `Codable` values
+/// in `UserDefaults` with automatic JSON encoding and decoding.
 ///
 /// This is particularly useful for storing complex data types in UserDefaults
 /// with the simplicity of SwiftUI Bindings.

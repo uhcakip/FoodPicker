@@ -86,8 +86,8 @@ extension FoodListScreen {
 }
 
 // MARK: - Subviews
-private extension FoodListScreen.FoodFormView {
-    enum Field: Int {
+extension FoodListScreen.FoodFormView {
+    private enum Field: Int {
         case name, emoji, calories, carb, fat, protein
 
         static let first: Self = .name
@@ -147,7 +147,7 @@ private extension FoodListScreen.FoodFormView {
         }
     }
 
-    func buildKeyboardToolbar() -> some ToolbarContent {
+    private func buildKeyboardToolbar() -> some ToolbarContent {
         ToolbarItemGroup(placement: .keyboard) {
             Spacer()
             Button(action: goPrevField) {
@@ -161,7 +161,7 @@ private extension FoodListScreen.FoodFormView {
 }
 
 // MARK: - Focus Handling
-private extension FoodListScreen.FoodFormView {
+extension FoodListScreen.FoodFormView {
     private func goPrevField() {
         if let currentField = field {
             field = .init(

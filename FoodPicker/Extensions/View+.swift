@@ -14,10 +14,7 @@ extension View {
             .controlSize(.large)
     }
 
-    func roundedRectBackground(
-        radius: CGFloat = 8,
-        fill: some ShapeStyle = .mainBg
-    ) -> some View {
+    func roundedRectBackground(radius: CGFloat = 8, fill: some ShapeStyle = .mainBg) -> some View {
         background(RoundedRectangle(cornerRadius: radius).fill(fill))
     }
 
@@ -25,13 +22,14 @@ extension View {
         sheet(item: item) { $0 }
     }
 
+    /// Expands the view to the full width of its container and aligns the content horizontally according to the
+    /// specified alignment.
+    ///
+    /// - Parameter alignment: The horizontal alignment for the content. Options are `.leading`, `.center`, and
+    ///   `.trailing`.
+    /// - Returns: A view that takes up the full width of its container and aligns its content according to the
+    ///   specified alignment.
     /// - Tag: hPush
-    ///
-    /// Expands the view to the full width of its container and aligns the content
-    /// horizontally according to the specified alignment.
-    ///
-    /// - Parameter alignment: The horizontal alignment for the content. Options
-    ///   are `.leading`, `.center`, and `.trailing`.
     func hPush(to alignment: TextAlignment) -> some View {
         switch alignment {
         case .leading:

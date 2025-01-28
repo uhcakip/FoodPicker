@@ -48,8 +48,8 @@ struct FoodPickerScreen: View {
 }
 
 // MARK: - Subviews
-private extension FoodPickerScreen {
-    var foodImage: some View {
+extension FoodPickerScreen {
+    private var foodImage: some View {
         Group {
             if let selectedFood {
                 Text(selectedFood.emoji)
@@ -66,7 +66,7 @@ private extension FoodPickerScreen {
     }
 
     @ViewBuilder
-    var seletedFoodInfoView: some View {
+    private var seletedFoodInfoView: some View {
         if let selectedFood {
             // MARK: food name & info button
             HStack {
@@ -82,8 +82,7 @@ private extension FoodPickerScreen {
                 } label: {
                     Image(symbol: .infoFill)
                         .font(.title)
-                        .foregroundStyle(
-                            Color.Catppuccin.peach.opacity(0.5))
+                        .foregroundStyle(Color.Catppuccin.peach.opacity(0.5))
                 }
                 .buttonStyle(.plain)
             }
@@ -126,11 +125,13 @@ private extension FoodPickerScreen {
         }
     }
 
-    var selectFoodButton: some View {
+    private var selectFoodButton: some View {
         Button {
-            selectedFood = foods.filter {
-                $0 != selectedFood
-            }.randomElement()
+            selectedFood =
+                foods.filter {
+                    $0 != selectedFood
+                }
+                .randomElement()
         } label: {
             Text(selectedFood == nil ? "告訴我" : "換一個")
                 .frame(width: 200)
@@ -139,7 +140,7 @@ private extension FoodPickerScreen {
         .padding(.bottom, -15)
     }
 
-    var resetButton: some View {
+    private var resetButton: some View {
         Button {
             selectedFood = nil
             shouldShowFoodInfo = false

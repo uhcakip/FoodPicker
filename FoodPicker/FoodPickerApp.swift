@@ -5,8 +5,8 @@
 //  Created by Yuna Chou on 2024/11/21.
 //
 
-import SwiftUI
 @_exported import Inject
+import SwiftUI
 
 @main
 struct FoodPickerApp: App {

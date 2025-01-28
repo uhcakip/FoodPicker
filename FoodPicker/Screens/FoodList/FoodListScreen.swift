@@ -36,17 +36,17 @@ struct FoodListScreen: View {
 }
 
 // MARK: - Subviews
-private extension FoodListScreen {
-    var isEditing: Bool {
+extension FoodListScreen {
+    private var isEditing: Bool {
         editMode.isEditing
     }
 
-    var titleBar: some View {
+    private var titleBar: some View {
         HStack {
             Label("Food List", symbol: .forkKnife)
                 .font(.title.bold())
                 .foregroundStyle(.accent)
-                .fixedSize() // for dymatic font size (xxxLarge)
+                .fixedSize()  // for dymatic font size (xxxLarge)
 
             EditButton()
                 .buttonStyle(.bordered)
@@ -57,7 +57,7 @@ private extension FoodListScreen {
         .padding()
     }
 
-    var addButton: some View {
+    private var addButton: some View {
         Button {
             sheet = .addFood { foods.append($0) }
         } label: {
@@ -68,7 +68,7 @@ private extension FoodListScreen {
         }
     }
 
-    var removeSelectionsButton: some View {
+    private var removeSelectionsButton: some View {
         Button {
             foods = foods.filter { !selectedFoodIDs.contains($0.id) }
         } label: {
@@ -79,7 +79,7 @@ private extension FoodListScreen {
         .mainButtonStyle(shape: .roundedRectangle(radius: 8))
     }
 
-    func buildFoodRow(data: Binding<Food>) -> some View {
+    private func buildFoodRow(data: Binding<Food>) -> some View {
         let food = data.wrappedValue
         return HStack {
             Text(food.name)
@@ -106,7 +106,7 @@ private extension FoodListScreen {
         }
     }
 
-    func buildFloatingButton() -> some View {
+    private func buildFloatingButton() -> some View {
         removeSelectionsButton
             .padding(.bottom, 10)
             .opacity(isEditing ? 1 : 0)
