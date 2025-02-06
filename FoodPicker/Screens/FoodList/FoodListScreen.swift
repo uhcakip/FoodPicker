@@ -46,7 +46,7 @@ extension FoodListScreen {
             Label("Food List", symbol: .forkKnife)
                 .font(.title.bold())
                 .foregroundStyle(.accent)
-                .fixedSize()  // for dymatic font size (xxxLarge)
+                .fixedSize()  // for dynamic font size (xxxLarge)
 
             EditButton()
                 .buttonStyle(.bordered)

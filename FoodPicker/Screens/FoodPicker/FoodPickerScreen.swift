@@ -23,7 +23,7 @@ struct FoodPickerScreen: View {
                     Text("What to eat today?")
                         .font(.title.bold())
 
-                    seletedFoodInfoView
+                    selectedFoodInfoView
 
                     Spacer()
                         .layoutPriority(1)
@@ -66,7 +66,7 @@ extension FoodPickerScreen {
     }
 
     @ViewBuilder
-    private var seletedFoodInfoView: some View {
+    private var selectedFoodInfoView: some View {
         if let selectedFood {
             // MARK: food name & info button
             HStack {
