@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "56570F32-ED2A-4A0C-8ABF-35D14F11E9AC",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:FoodPicker.xcodeproj",
+        "identifier" : "E865CB922D55E0DA00F293F3",
+        "name" : "FoodPickerTests"
+      }
+    }
+  ],
+  "version" : 1
+}

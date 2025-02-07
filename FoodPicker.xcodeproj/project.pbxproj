@@ -10,11 +10,27 @@
 		E8B112B32CF9B6530093A12A /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = E8B112B22CF9B6530093A12A /* Inject */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E865CB972D55E0DA00F293F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E8BD6C542CEF2EBD00A7AADE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E8BD6C5B2CEF2EBD00A7AADE;
+			remoteInfo = FoodPicker;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		E865CB932D55E0DA00F293F3 /* FoodPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8BD6C5C2CEF2EBD00A7AADE /* FoodPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		E865CB942D55E0DA00F293F3 /* FoodPickerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = FoodPickerTests;
+			sourceTree = "<group>";
+		};
 		E8BD6C5E2CEF2EBD00A7AADE /* FoodPicker */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = FoodPicker;
@@ -23,6 +39,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E865CB902D55E0DA00F293F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8BD6C592CEF2EBD00A7AADE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -38,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				E8BD6C5E2CEF2EBD00A7AADE /* FoodPicker */,
+				E865CB942D55E0DA00F293F3 /* FoodPickerTests */,
 				E8BD6C5D2CEF2EBD00A7AADE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				E8BD6C5C2CEF2EBD00A7AADE /* FoodPicker.app */,
+				E865CB932D55E0DA00F293F3 /* FoodPickerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +78,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E865CB922D55E0DA00F293F3 /* FoodPickerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E865CB992D55E0DA00F293F3 /* Build configuration list for PBXNativeTarget "FoodPickerTests" */;
+			buildPhases = (
+				E865CB8F2D55E0DA00F293F3 /* Sources */,
+				E865CB902D55E0DA00F293F3 /* Frameworks */,
+				E865CB912D55E0DA00F293F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E865CB982D55E0DA00F293F3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				E865CB942D55E0DA00F293F3 /* FoodPickerTests */,
+			);
+			name = FoodPickerTests;
+			packageProductDependencies = (
+			);
+			productName = FoodPickerTests;
+			productReference = E865CB932D55E0DA00F293F3 /* FoodPickerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E8BD6C5B2CEF2EBD00A7AADE /* FoodPicker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8BD6C6A2CEF2EC000A7AADE /* Build configuration list for PBXNativeTarget "FoodPicker" */;
@@ -84,9 +132,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
+					E865CB922D55E0DA00F293F3 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = E8BD6C5B2CEF2EBD00A7AADE;
+					};
 					E8BD6C5B2CEF2EBD00A7AADE = {
 						CreatedOnToolsVersion = 16.1;
 					};
@@ -110,11 +162,19 @@
 			projectRoot = "";
 			targets = (
 				E8BD6C5B2CEF2EBD00A7AADE /* FoodPicker */,
+				E865CB922D55E0DA00F293F3 /* FoodPickerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E865CB912D55E0DA00F293F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8BD6C5A2CEF2EBD00A7AADE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -147,6 +207,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E865CB8F2D55E0DA00F293F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8BD6C582CEF2EBD00A7AADE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -156,7 +223,55 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E865CB982D55E0DA00F293F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E8BD6C5B2CEF2EBD00A7AADE /* FoodPicker */;
+			targetProxy = E865CB972D55E0DA00F293F3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		E865CB9A2D55E0DA00F293F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9YN34DK99C;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uhcakip.FoodPickerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FoodPicker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FoodPicker";
+			};
+			name = Debug;
+		};
+		E865CB9B2D55E0DA00F293F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9YN34DK99C;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uhcakip.FoodPickerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FoodPicker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FoodPicker";
+			};
+			name = Release;
+		};
 		E8BD6C682CEF2EC000A7AADE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -343,6 +458,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E865CB992D55E0DA00F293F3 /* Build configuration list for PBXNativeTarget "FoodPickerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E865CB9A2D55E0DA00F293F3 /* Debug */,
+				E865CB9B2D55E0DA00F293F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E8BD6C572CEF2EBD00A7AADE /* Build configuration list for PBXProject "FoodPicker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -12,13 +12,14 @@ struct Suffix: Equatable, Codable {
     var wrappedValue: Double
     private let suffix: String
 
-    init(wrappedValue: Double, _ suffix: String) {
+    init(wrappedValue: Double, _ suffix: String = "") {
         self.wrappedValue = wrappedValue
         self.suffix = suffix
     }
 
     var projectedValue: String {
-        wrappedValue.formatted() + " \(suffix)"
+        (wrappedValue.formatted(.number.precision(.fractionLength(0...1))) + " \(suffix)")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
