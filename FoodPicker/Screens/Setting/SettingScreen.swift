@@ -11,7 +11,7 @@ import SwiftUI
 struct SettingScreen: View {
     @ObserveInjection var inject
     @AppStorageCodable(.shouldUseDarkMode) private var shouldUseDarkMode = false
-    @AppStorageCodable(.selectedUnit) private var selectedUnit = Unit.gram
+    @AppStorageCodable(.selectedWeightUnit) private var selectedUnit = Unit.gram
     @AppStorageCodable(.selectedTab) private var selectedTab = HomeScreen.TabItem.home
     @State private var dialog: Dialog = .none
 
@@ -98,7 +98,7 @@ extension SettingScreen {
         func action() {
             switch self {
             case .resetSettings:
-                let keys = [StorageKey.shouldUseDarkMode, .selectedUnit, .selectedTab]
+                let keys = [StorageKey.shouldUseDarkMode, .selectedWeightUnit, .selectedTab]
                 for key in keys {
                     UserDefaults.standard.removeObject(forKey: key.rawValue)
                 }

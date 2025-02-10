@@ -9,7 +9,7 @@ import Foundation
 
 enum StorageKey: String {
     case shouldUseDarkMode
-    case selectedUnit
+    case selectedWeightUnit
     case selectedTab
     case foodList
 }
