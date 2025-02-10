@@ -22,8 +22,8 @@ extension FoodUnit {
 }
 
 extension FoodUnit {
-    static func getSelection() -> Self {
-        AppStorageCodable(storageKey).wrappedValue
+    static func getSelection(store: UserDefaults = .standard) -> Self {
+        AppStorageCodable(storageKey, store: store).wrappedValue
     }
 
     var localizedSymbol: String {
