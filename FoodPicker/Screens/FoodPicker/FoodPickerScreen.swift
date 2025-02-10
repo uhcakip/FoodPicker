@@ -89,7 +89,7 @@ extension FoodPickerScreen {
             .id(selectedFood.name)
 
             // MARK: food calorie
-            Text("Calories \(selectedFood.$cal)")
+            Text("Calories \(selectedFood.$cal.description)")
                 .font(.title2)
 
             // MARK: food nutrition
@@ -108,9 +108,9 @@ extension FoodPickerScreen {
                             .padding(.horizontal, -10)
 
                         GridRow {
-                            Text("\(selectedFood.$protein)")
-                            Text("\(selectedFood.$fat)")
-                            Text("\(selectedFood.$carb)")
+                            Text("\(selectedFood.$protein.description)")
+                            Text("\(selectedFood.$fat.description)")
+                            Text("\(selectedFood.$carb.description)")
                         }
                     }
                     .font(.title3)

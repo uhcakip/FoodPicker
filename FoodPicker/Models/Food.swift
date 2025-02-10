@@ -11,10 +11,31 @@ struct Food: Equatable, Identifiable, Codable {
     var id = UUID()
     var name: String
     var emoji: String
-    @Suffix("kcal") var cal: Double = .zero
-    @Suffix("g") var carb: Double = .zero
-    @Suffix("g") var fat: Double = .zero
-    @Suffix("g") var protein: Double = .zero
+    @Suffix<EnergyUnit> var cal: Double
+    @Suffix<WeightUnit> var carb: Double
+    @Suffix<WeightUnit> var fat: Double
+    @Suffix<WeightUnit> var protein: Double
+}
+
+// MARK: - Statics
+extension Food {
+    private init(
+        id: UUID = UUID(),
+        name: String,
+        emoji: String,
+        cal: Double,
+        carb: Double,
+        fat: Double,
+        protein: Double
+    ) {
+        self.id = id
+        self.name = name
+        self.emoji = emoji
+        self._cal = .init(wrappedValue: cal, .kcal)
+        self._carb = .init(wrappedValue: carb, .gram)
+        self._fat = .init(wrappedValue: fat, .gram)
+        self._protein = .init(wrappedValue: protein, .gram)
+    }
 
     static let examples = [
         Self(name: "Burger", emoji: "🍔", cal: 294, carb: 14, fat: 24, protein: 17),
@@ -28,7 +49,28 @@ struct Food: Equatable, Identifiable, Codable {
     ]
 
     static var new: Self {
-        //.init(name: "", emoji: "")
-        Self(name: "", emoji: "")
+        let selectedEnergyUnit = EnergyUnit.getSelection()
+        let selectedWeightUnit = WeightUnit.getSelection()
+
+        return Self(
+            name: "",
+            emoji: "",
+            cal: .init(
+                wrappedValue: .zero,
+                selectedEnergyUnit
+            ),
+            carb: .init(
+                wrappedValue: .zero,
+                selectedWeightUnit
+            ),
+            fat: .init(
+                wrappedValue: .zero,
+                selectedWeightUnit
+            ),
+            protein: .init(
+                wrappedValue: .zero,
+                selectedWeightUnit
+            )
+        )
     }
 }

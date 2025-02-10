@@ -55,10 +55,10 @@ extension FoodListScreen {
                     Form {
                         Field.name.buildString(value: $food.name, focusedField: $field)
                         Field.emoji.buildString(value: $food.emoji, focusedField: $field)
-                        Field.calories.buildNumber(value: $food.cal, focusedField: $field)
-                        Field.carb.buildNumber(value: $food.carb, focusedField: $field)
-                        Field.fat.buildNumber(value: $food.fat, focusedField: $field)
-                        Field.protein.buildNumber(value: $food.protein, focusedField: $field)
+                        Field.calories.buildNumber(value: $food.cal, unit: food.$cal.unit, focusedField: $field)
+                        Field.carb.buildNumber(value: $food.carb, unit: food.$carb.unit, focusedField: $field)
+                        Field.fat.buildNumber(value: $food.fat, unit: food.$fat.unit, focusedField: $field)
+                        Field.protein.buildNumber(value: $food.protein, unit: food.$protein.unit, focusedField: $field)
                     }
                     .padding(.top, -16)
 
@@ -112,13 +112,6 @@ extension FoodListScreen.FoodFormView {
             }
         }
 
-        var suffix: String {
-            switch self {
-            case .calories: "kcal"
-            default: "g"
-            }
-        }
-
         func buildString(
             value: Binding<String>,
             focusedField: FocusState<Self?>.Binding
@@ -134,6 +127,7 @@ extension FoodListScreen.FoodFormView {
 
         func buildNumber(
             value: Binding<Double>,
+            unit: some FoodUnit,
             focusedField: FocusState<Self?>.Binding
         ) -> some View {
             LabeledContent(title) {
@@ -141,7 +135,8 @@ extension FoodListScreen.FoodFormView {
                     TextField("", value: value, format: .number.precision(.fractionLength(1)))
                         .keyboardType(.decimalPad)
                         .focused(focusedField, equals: self)
-                    Text(suffix)
+
+                    Text(unit.localizedSymbol)
                 }
             }
         }

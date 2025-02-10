@@ -11,7 +11,7 @@ import SwiftUI
 struct SettingScreen: View {
     @ObserveInjection var inject
     @AppStorageCodable(.shouldUseDarkMode) private var shouldUseDarkMode = false
-    @AppStorageCodable(.selectedWeightUnit) private var selectedUnit = Unit.gram
+    @AppStorageCodable(.selectedWeightUnit) private var selectedUnit: WeightUnit
     @AppStorageCodable(.selectedTab) private var selectedTab = HomeScreen.TabItem.home
     @State private var dialog: Dialog = .none
 
@@ -30,8 +30,8 @@ struct SettingScreen: View {
                         .tint(.accent)
 
                     Picker("Unit", symbol: .numberSign, selection: $selectedUnit) {
-                        ForEach(Unit.allCases) {
-                            Text($0.rawValue)
+                        ForEach(WeightUnit.allCases) {
+                            Text($0.localizedSymbol)
                         }
                     }
 

@@ -10,30 +10,31 @@ import Testing
 @testable import FoodPicker
 
 struct SuffixTest {
+    @AppStorageCodable(.selectedWeightUnit) var selectedUnit: WeightUnit
+
     @Test(
-        "Convert integer to string without decimals",
-        arguments: [(100, "100"), (-42, "-42")]
+        "Convert gram value to ounce string representation when selected unit is pound",
+        arguments: [(100, "3.5 oz"), (-300.456, "-10.6 oz"), (200.567, "7.1 oz")]
     )
-    func formatIntegerWithoutDecimals(value: Double, expected: String) {
-        let sut = Suffix(wrappedValue: value)
-        #expect(sut.projectedValue == expected)
+    func gramToOunceConversion(value: Double, expected: String) {
+        withKnownIssue("Currently using UserDefaults.standard; an additional testing store is required for tests.") {
+            let sut = Suffix(wrappedValue: value, WeightUnit.gram)
+            #expect(sut.description == expected)
+        } when: {
+            selectedUnit == .gram
+        }
     }
 
     @Test(
-        "Round decimal to one decimal place",
-        arguments: [(100.567, "100.6"), (100.432, "100.4"), (-100.456, "-100.5")]
+        "Convert ounce value to gram string representation when selected unit is gram",
+        arguments: [(3.5, "99.2 g"), (-10.6, "-300.5 g"), (7.1, "201.3 g")]
     )
-    func roundDecimalToOnePlace(value: Double, expected: String) {
-        let sut = Suffix(wrappedValue: value)
-        #expect(sut.projectedValue == expected)
-    }
-
-    @Test(
-        "Append unit suffix with a space",
-        arguments: [(100, "g", "100 g"), (-42.567, "kcal", "-42.6 kcal")]
-    )
-    func appendSuffixWithSpace(value: Double, suffix: String, expected: String) {
-        let sut = Suffix(wrappedValue: value, suffix)
-        #expect(sut.projectedValue == expected)
+    func ounceToGramConversion(value: Double, expected: String) {
+        withKnownIssue("Currently using UserDefaults.standard; an additional testing store is required for tests.") {
+            let sut = Suffix(wrappedValue: value, WeightUnit.ounce)
+            #expect(sut.description == expected)
+        } when: {
+            selectedUnit == .ounce
+        }
     }
 }

@@ -8,18 +8,30 @@
 import SwiftUI
 
 @propertyWrapper
-struct Suffix: Equatable, Codable {
+struct Suffix<Unit: FoodUnit & Equatable>: Equatable, Codable {
     var wrappedValue: Double
-    private let suffix: String
+    var unit: Unit
 
-    init(wrappedValue: Double, _ suffix: String = "") {
+    init(wrappedValue: Double, _ unit: Unit) {
         self.wrappedValue = wrappedValue
-        self.suffix = suffix
+        self.unit = unit
     }
 
-    var projectedValue: String {
-        (wrappedValue.formatted(.number.precision(.fractionLength(0...1))) + " \(suffix)")
-            .trimmingCharacters(in: .whitespacesAndNewlines)
+    var projectedValue: Self {
+        get { self }
+        set { self = newValue }
+    }
+
+    var description: String {
+        let selectedUnit = Unit.getSelection()
+        let converted = Measurement(value: wrappedValue, unit: unit.dimension).converted(to: selectedUnit.dimension)
+        return converted.formatted(
+            .measurement(
+                width: .abbreviated,
+                usage: .asProvided,
+                numberFormatStyle: .number.precision(.fractionLength(0...1))
+            )
+        )
     }
 }
 
@@ -69,5 +81,11 @@ struct AppStorageCodable<Value: Codable>: DynamicProperty {
             get: { wrappedValue },
             set: { wrappedValue = $0 }
         )
+    }
+}
+
+extension AppStorageCodable where Value: FoodUnit {
+    init(_ key: StorageKey, store: UserDefaults? = nil) {
+        self.init(wrappedValue: Value.defaultValue, key, store: store)
     }
 }
