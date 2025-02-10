@@ -55,7 +55,7 @@ extension FoodListScreen {
                     Form {
                         Field.name.buildString(value: $food.name, focusedField: $field)
                         Field.emoji.buildString(value: $food.emoji, focusedField: $field)
-                        Field.calories.buildNumber(value: $food.calorie, focusedField: $field)
+                        Field.calories.buildNumber(value: $food.cal, focusedField: $field)
                         Field.carb.buildNumber(value: $food.carb, focusedField: $field)
                         Field.fat.buildNumber(value: $food.fat, focusedField: $field)
                         Field.protein.buildNumber(value: $food.protein, focusedField: $field)

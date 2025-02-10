@@ -89,7 +89,7 @@ extension FoodPickerScreen {
             .id(selectedFood.name)
 
             // MARK: food calorie
-            Text("Calories \(selectedFood.$calorie)")
+            Text("Calories \(selectedFood.$cal)")
                 .font(.title2)
 
             // MARK: food nutrition

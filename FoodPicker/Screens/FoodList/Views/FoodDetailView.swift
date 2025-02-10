@@ -23,7 +23,7 @@ extension FoodListScreen {
                     .minimumScaleFactor(shouldUseVStack ? 1 : 0.5)
 
                 Grid(horizontalSpacing: 12, verticalSpacing: 12) {
-                    buildNutritionGridRowView(title: "Calories", value: food.$calorie)
+                    buildNutritionGridRowView(title: "Calories", value: food.$cal)
                     buildNutritionGridRowView(title: "Protein", value: food.$protein)
                     buildNutritionGridRowView(title: "Fat", value: food.$fat)
                     buildNutritionGridRowView(title: "Carb", value: food.$carb)
