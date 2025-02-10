@@ -17,7 +17,7 @@ struct FoodPickerScreen: View {
     var body: some View {
         GeometryReader { proxy in
             ScrollView {
-                VStack(spacing: 30) {
+                VStack(spacing: 20) {
                     foodImage
 
                     Text("What to eat today?")
@@ -25,12 +25,11 @@ struct FoodPickerScreen: View {
 
                     selectedFoodInfoView
 
-                    Spacer()
-                        .layoutPriority(1)
-
-                    selectFoodButton
-
-                    resetButton
+                    VStack {
+                        selectFoodButton
+                        resetButton
+                    }
+                    .frame(maxHeight: .infinity, alignment: .bottom)
 
                 }
                 .padding()
@@ -139,7 +138,6 @@ extension FoodPickerScreen {
                 .frame(width: 200)
                 .transformEffect(.identity)
         }
-        .padding(.bottom, -15)
     }
 
     private var resetButton: some View {
