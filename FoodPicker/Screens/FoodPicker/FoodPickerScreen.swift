@@ -41,6 +41,7 @@ struct FoodPickerScreen: View {
                 .animation(.fpEase, value: selectedFood)
                 .animation(.fpSpring, value: shouldShowFoodInfo)
             }
+            .scrollIndicators(.hidden)
             .background(.secondBg)
         }
         .enableInjection()
@@ -106,6 +107,7 @@ extension FoodPickerScreen {
                         Divider()
                             .gridCellUnsizedAxes(.horizontal)
                             .padding(.horizontal, -10)
+                            .background(Color(.label))
 
                         GridRow {
                             Text("\(selectedFood.$protein.description)")

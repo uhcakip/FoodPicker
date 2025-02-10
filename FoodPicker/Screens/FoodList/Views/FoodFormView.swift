@@ -67,6 +67,7 @@ extension FoodListScreen {
                         save(food)
                     } label: {
                         Text(inValidMessage ?? "Save")
+                            .font(.title2.bold())
                             .maxWidth()
                             .foregroundStyle(isInputInvalid ? .secondary : .primary)
                     }
