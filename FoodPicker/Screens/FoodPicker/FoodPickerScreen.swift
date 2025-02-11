@@ -12,7 +12,7 @@ struct FoodPickerScreen: View {
     @State var selectedFood: Food?
     @State private var shouldShowFoodInfo = true
     @ScaledMetric private var foodImageSize = 200.0
-    @AppStorageCodable(.foodList) private var foods = Food.examples
+    @AppStorageCodable(.foodList) private var foods: [Food]
 
     var body: some View {
         GeometryReader { proxy in

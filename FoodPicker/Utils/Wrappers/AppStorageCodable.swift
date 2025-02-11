@@ -56,8 +56,13 @@ struct AppStorageCodable<Value: Codable>: DynamicProperty {
     }
 }
 
-extension AppStorageCodable where Value: FoodUnit {
-    init(_ key: StorageKey, store: UserDefaults? = nil) {
+/// MARK: - Convenience Initializers for Specific Types
+extension AppStorageCodable {
+    init(_ key: StorageKey, store: UserDefaults? = nil) where Value: FoodUnit {
         self.init(wrappedValue: Value.defaultValue, key, store: store)
+    }
+
+    init(_ key: StorageKey, store: UserDefaults? = nil) where Value == [Food] {
+        self.init(wrappedValue: Food.examples, key, store: store)
     }
 }

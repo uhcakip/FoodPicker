@@ -10,9 +10,9 @@ import SwiftUI
 struct FoodListScreen: View {
     @ObserveInjection var inject
     @State private var editMode: EditMode = .inactive
-    @AppStorageCodable(.foodList) private var foods = Food.examples
     @State private var selectedFoodIDs = Set<Food.ID>()
     @State private var sheet: FoodSheetView?
+    @AppStorageCodable(.foodList) private var foods: [Food]
 
     var body: some View {
         VStack(alignment: .leading) {
