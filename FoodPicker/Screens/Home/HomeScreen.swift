@@ -9,8 +9,8 @@ import SwiftUI
 
 struct HomeScreen: View {
     @ObserveInjection var inject
-    @State private var selectedTab: TabItem.RawValue = {
-        @AppStorageCodable(.selectedTab) var tab = TabItem.home.rawValue
+    @State private var selectedTab: TabItem = {
+        @AppStorageCodable(.selectedTab) var tab: TabItem
         return tab
     }()
     @AppStorageCodable(.shouldUseDarkMode) private var shouldUseDarkMode = false
@@ -18,7 +18,7 @@ struct HomeScreen: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             ForEach(TabItem.allCases) {
-                Tab(symbol: $0.symbol, value: $0.rawValue, content: $0.content)
+                Tab(symbol: $0.symbol, value: $0, content: $0.content)
             }
         }
         .preferredColorScheme(shouldUseDarkMode ? .dark : .light)

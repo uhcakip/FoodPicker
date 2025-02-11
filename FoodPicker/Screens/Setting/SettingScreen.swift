@@ -12,7 +12,7 @@ struct SettingScreen: View {
     @ObserveInjection var inject
     @AppStorageCodable(.shouldUseDarkMode) private var shouldUseDarkMode = false
     @AppStorageCodable(.selectedWeightUnit) private var selectedUnit: WeightUnit
-    @AppStorageCodable(.selectedTab) private var selectedTab = HomeScreen.TabItem.home
+    @AppStorageCodable(.selectedTab) private var selectedTab: HomeScreen.TabItem
     @State private var dialog: Dialog = .none
 
     private var shouldShowDialog: Binding<Bool> {

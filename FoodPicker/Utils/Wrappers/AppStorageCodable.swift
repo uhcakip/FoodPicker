@@ -65,4 +65,8 @@ extension AppStorageCodable {
     init(_ key: StorageKey, store: UserDefaults? = nil) where Value == [Food] {
         self.init(wrappedValue: Food.examples, key, store: store)
     }
+
+    init(_ key: StorageKey, store: UserDefaults? = nil) where Value == HomeScreen.TabItem {
+        self.init(wrappedValue: .home, key, store: store)
+    }
 }
