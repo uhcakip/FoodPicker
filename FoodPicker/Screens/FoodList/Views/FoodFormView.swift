@@ -123,6 +123,7 @@ extension FoodListScreen.FoodFormView {
                     .onSubmit {
                         value.wrappedValue = value.wrappedValue.trimmingCharacters(in: .whitespacesAndNewlines)
                     }
+                    .keyboardType(self == .emoji ? .emoji : .default)
             }
         }
 
