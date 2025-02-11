@@ -131,9 +131,20 @@ extension FoodListScreen.FoodFormView {
             unit: some FoodUnit,
             focusedField: FocusState<Self?>.Binding
         ) -> some View {
-            LabeledContent(title) {
+            let stringValue = Binding {
+                NumberFormatter.foodNutrition.string(from: NSNumber(value: value.wrappedValue)) ?? ""
+            } set: { newValue in
+                let trimmed = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
+                if let number = NumberFormatter.foodNutrition.number(from: trimmed)?.doubleValue {
+                    value.wrappedValue = number
+                } else if trimmed.isEmpty {
+                    value.wrappedValue = 0
+                }
+            }
+
+            return LabeledContent(title) {
                 HStack {
-                    TextField("0.0", value: value, formatter: NumberFormatter.foodNutrition)
+                    TextField("0.0", text: stringValue)
                         .keyboardType(.decimalPad)
                         .focused(focusedField, equals: self)
 
