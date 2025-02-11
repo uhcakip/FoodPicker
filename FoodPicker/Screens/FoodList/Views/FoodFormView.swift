@@ -56,9 +56,9 @@ extension FoodListScreen {
                         Field.name.buildString(value: $food.name, focusedField: $field)
                         Field.emoji.buildString(value: $food.emoji, focusedField: $field)
                         Field.calories.buildNumber(value: $food.$cal, focusedField: $field)
-                        Field.carb.buildNumber(value: $food.$carb, focusedField: $field)
-                        Field.fat.buildNumber(value: $food.$fat, focusedField: $field)
                         Field.protein.buildNumber(value: $food.$protein, focusedField: $field)
+                        Field.fat.buildNumber(value: $food.$fat, focusedField: $field)
+                        Field.carb.buildNumber(value: $food.$carb, focusedField: $field)
                     }
                     .padding(.top, -16)
 
@@ -89,19 +89,19 @@ extension FoodListScreen {
 // MARK: - Subviews
 extension FoodListScreen.FoodFormView {
     private enum Field: Int {
-        case name, emoji, calories, carb, fat, protein
+        case name, emoji, calories, protein, fat, carb
 
         static let first: Self = .name
-        static let last: Self = .protein
+        static let last: Self = .carb
 
         var title: String {
             switch self {
             case .name: "Name"
             case .emoji: "Emoji"
             case .calories: "Calories"
-            case .carb: "Carb"
-            case .fat: "Fat"
             case .protein: "Protein"
+            case .fat: "Fat"
+            case .carb: "Carb"
             }
         }
 
