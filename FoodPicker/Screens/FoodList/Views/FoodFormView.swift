@@ -133,7 +133,7 @@ extension FoodListScreen.FoodFormView {
         ) -> some View {
             LabeledContent(title) {
                 HStack {
-                    TextField("", value: value, format: .number.precision(.fractionLength(1)))
+                    TextField("0.0", value: value, formatter: NumberFormatter.foodNutrition)
                         .keyboardType(.decimalPad)
                         .focused(focusedField, equals: self)
 
