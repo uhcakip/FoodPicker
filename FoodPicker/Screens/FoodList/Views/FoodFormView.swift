@@ -55,10 +55,10 @@ extension FoodListScreen {
                     Form {
                         Field.name.buildString(value: $food.name, focusedField: $field)
                         Field.emoji.buildString(value: $food.emoji, focusedField: $field)
-                        Field.calories.buildNumber(value: $food.cal, unit: food.$cal.unit, focusedField: $field)
-                        Field.carb.buildNumber(value: $food.carb, unit: food.$carb.unit, focusedField: $field)
-                        Field.fat.buildNumber(value: $food.fat, unit: food.$fat.unit, focusedField: $field)
-                        Field.protein.buildNumber(value: $food.protein, unit: food.$protein.unit, focusedField: $field)
+                        Field.calories.buildNumber(value: $food.$cal, focusedField: $field)
+                        Field.carb.buildNumber(value: $food.$carb, focusedField: $field)
+                        Field.fat.buildNumber(value: $food.$fat, focusedField: $field)
+                        Field.protein.buildNumber(value: $food.$protein, focusedField: $field)
                     }
                     .padding(.top, -16)
 
@@ -128,18 +128,17 @@ extension FoodListScreen.FoodFormView {
         }
 
         func buildNumber(
-            value: Binding<Double>,
-            unit: some FoodUnit,
+            value: Binding<Suffix<some FoodUnit>>,
             focusedField: FocusState<Self?>.Binding
         ) -> some View {
             let stringValue = Binding {
-                NumberFormatter.foodNutrition.string(from: NSNumber(value: value.wrappedValue)) ?? ""
+                NumberFormatter.foodNutrition.string(from: NSNumber(value: value.wrappedValue.convertedValue)) ?? ""
             } set: { newValue in
                 let trimmed = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
                 if let number = NumberFormatter.foodNutrition.number(from: trimmed)?.doubleValue {
-                    value.wrappedValue = number
+                    value.wrappedValue.wrappedValue = number
                 } else if trimmed.isEmpty {
-                    value.wrappedValue = 0
+                    value.wrappedValue.wrappedValue = 0
                 }
             }
 
@@ -149,7 +148,7 @@ extension FoodListScreen.FoodFormView {
                         .keyboardType(.decimalPad)
                         .focused(focusedField, equals: self)
 
-                    Text(unit.localizedSymbol)
+                    Text(type(of: value.wrappedValue.unit).getSelection().localizedSymbol)
                 }
             }
         }

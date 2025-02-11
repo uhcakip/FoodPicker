@@ -24,16 +24,23 @@ struct Suffix<Unit: FoodUnit & Equatable>: Equatable {
         set { self = newValue }
     }
 
+    var convertedValue: Double {
+        converted.value
+    }
+
     var description: String {
-        let selectedUnit = Unit.getSelection(store: store)
-        let converted = Measurement(value: wrappedValue, unit: unit.dimension).converted(to: selectedUnit.dimension)
-        return converted.formatted(
+        converted.formatted(
             .measurement(
                 width: .abbreviated,
                 usage: .asProvided,
                 numberFormatStyle: .number.precision(.fractionLength(0...1))
             )
         )
+    }
+
+    private var converted: Measurement<Unit.T> {
+        let selectedUnit = Unit.getSelection()
+        return Measurement(value: wrappedValue, unit: unit.dimension).converted(to: selectedUnit.dimension)
     }
 }
 
